@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
             data => {
               if(data != undefined) {
-                this.api.crear_header_token(data.token)
+                this.api.guardar_token(data.token)
                 this.router.navigate(['/producto'])
               } else {
                 this.router.navigate(['/login'])

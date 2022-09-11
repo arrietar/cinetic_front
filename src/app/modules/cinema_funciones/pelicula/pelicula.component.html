@@ -1,1 +1,24 @@
-<p>pelicula works!</p>
+<p-table [value]="peliculas" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th> Codigo </th>
+      <th> Nombre </th>
+      <th> Genero </th>
+      <th> Clasificacion </th>
+      <th> Fecha Filmacion </th>
+      <th> Duracion </th>
+      <th> Caratula </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-pelicula>
+    <tr>
+      <td>{{pelicula.codigo_pelicula}}</td>
+      <td>{{pelicula.nombre_pelicula}}</td>
+      <td>{{pelicula.genero}}</td>
+      <td>{{pelicula.clasificacion}}</td>
+      <td>{{pelicula.fecha_filmacion}}</td>
+      <td>{{pelicula.duracion}}</td>
+      <td><a href="{{pelicula.caratula}}" target="_blank">{{pelicula.caratula}}</a></td>
+    </tr>
+  </ng-template>
+</p-table>

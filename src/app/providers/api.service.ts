@@ -23,13 +23,19 @@ export class ApiService {
   }
 
   get(endpoint: string):Observable<any[]> {
+    this.crear_header_token();
     let url = `${this.base_url+'/'+endpoint+'/'}`
     return this.http.get(url, this.options_token).pipe(catchError(this.handleError<any>()))
   }
 
-  crear_header_token(token: string) {
-    this.header_token = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Token '+token)
-    this.options_token = { headers: this.header_token }
+  guardar_token(token: string) {
+      localStorage.setItem('token_user', token)
+  }
+
+  private crear_header_token() {
+    const token = localStorage.getItem('token_user') || 'no_token';
+    this.header_token = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Token ${token}`);
+    this.options_token = { headers: this.header_token };
   }
 
   private handleError<T> (result?: T) {

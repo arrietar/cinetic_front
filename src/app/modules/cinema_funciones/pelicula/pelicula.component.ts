@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../../../providers/api.service";
 
 @Component({
   selector: 'app-pelicula',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeliculaComponent implements OnInit {
 
-  constructor() { }
+  peliculas: any[] = []
+
+  constructor(private api:ApiService) { }
 
   ngOnInit(): void {
+    this.api.get('pelicula').subscribe(data => {
+      if (data) {
+        this.peliculas = data
+      } else {
+        alert('No se encontraron peliculas')
+      }
+      console.log(data)
+    })
   }
-
 }
