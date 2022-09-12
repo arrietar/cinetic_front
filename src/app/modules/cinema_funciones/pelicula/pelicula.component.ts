@@ -14,7 +14,7 @@ export class PeliculaComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.get('pelicula').subscribe(data => {
-      if (data) {
+      if (data != undefined) {
         this.peliculas = data
       } else {
         alert('No se encontraron peliculas')

@@ -14,7 +14,7 @@ export class ProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.get('producto').subscribe(data => {
-      if (data) {
+      if (data != undefined) {
         this.productos = data
       } else {
         alert('No se encontraron productos')
@@ -22,5 +22,4 @@ export class ProductoComponent implements OnInit {
       console.log(data)
     })
   }
-
 }
