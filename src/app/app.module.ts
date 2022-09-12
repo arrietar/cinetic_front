@@ -15,13 +15,13 @@ import { PeliculaComponent } from './modules/cinema_funciones/pelicula/pelicula.
 import { FuncionComponent } from './modules/cinema_funciones/funcion/funcion.component';
 import { VentaProductoComponent } from './modules/ventas/venta-producto/venta-producto.component';
 import { VentaBoletaComponent } from './modules/ventas/venta-boleta/venta-boleta.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ApiService} from "./providers/api.service";
-import {InputTextModule} from "primeng/inputtext";
-import {ButtonModule} from "primeng/button";
-import {TableModule} from "primeng/table";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ApiService } from "./providers/api.service";
+import { InputTextModule } from "primeng/inputtext";
+import { ButtonModule } from "primeng/button";
+import { TableModule } from "primeng/table";
 
 @NgModule({
   declarations: [
