@@ -1,22 +1,24 @@
-<p-table [value]="productos" responsiveLayout="scroll">
-    <ng-template pTemplate="header">
-        <tr>
-            <th> Codigo </th>
-            <th> Nombre </th>
-            <th> Valor de Compra </th>
-            <th> Valor de Venta </th>
-            <th> Ciudad </th>
-            <th> Cantidad </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-producto>
-        <tr>
-            <td>{{producto.codigo_producto}}</td>
-            <td>{{producto.nombre_producto}}</td>
-            <td>{{producto.valor_compra}}</td>
-            <td>{{producto.valor_venta}}</td>
-            <td>{{producto.ciudad}}</td>
-            <td>{{producto.inventario}}</td>
-        </tr>
-    </ng-template>
-</p-table>
+<div class="flex justify-content-center align-items-center w-screen h-screen bg-cyan-50">
+    <p-table [value]="productos" responsiveLayout="scroll" class="w-8 h-min">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="codigo"> Codigo <p-sortIcon field="codigo"></p-sortIcon></th>
+                <th pSortableColumn="nombre"> Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                <th pSortableColumn="valor de compra"> Valor de Compra <p-sortIcon field="valor de compra"></p-sortIcon></th>
+                <th pSortableColumn="valor de venta"> Valor de Venta <p-sortIcon field="valor de venta"></p-sortIcon></th>
+                <th pSortableColumn="ciudad"> Ciudad <p-sortIcon field="ciudad"></p-sortIcon></th>
+                <th pSortableColumn="cantidad"> Cantidad <p-sortIcon field="cantidad"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-producto>
+            <tr>
+                <td>{{producto.codigo_producto}}</td>
+                <td>{{producto.nombre_producto}}</td>
+                <td>{{producto.valor_compra}}</td>
+                <td>{{producto.valor_venta}}</td>
+                <td>{{producto.ciudad}}</td>
+                <td>{{producto.inventario}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
