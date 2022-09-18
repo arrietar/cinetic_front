@@ -1,30 +1,32 @@
-<div class="flex justify-content-center align-items-center w-screen h-screen pt-4 surface-900">
-    <div class="flex flex-column justify-content-center align-content-center w-20rem h-20rem border-round-xl bg-cyan-800">
-        <form [formGroup]="form_usuario">
-            <div class="flex justify-content-center text-100" style="font-family: 'Times New Roman'">
-                <h1>CineTIC</h1>
-            </div>
-            <div class="flex flex-column justify-content-center align-content-center mx-4">
-                <div class="field w-full">
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon">
-                            <i class="pi pi-user"></i>
-                        </span>
-                        <input type="text" formControlName="username" placeholder="Usuario" pInputText>
+<div class="flex justify-content-center align-items-center w-screen h-screen pt-4" style="font-family: 'Ruda', sans-serif;">
+    <div class="flex justify-content-center align-items-center p-2 border-round-xl bg-cyan-800">
+        <div class="flex flex-column justify-content-center align-content-center w-20rem h-20rem border-round-xl bg-black-alpha-80">
+            <form [formGroup]="form_usuario">
+                <div class="flex justify-content-center text-200 text-6xl">
+                    CineTIC
+                </div>
+                <div class="flex flex-column justify-content-center align-content-center mx-4 my-2">
+                    <div class="field w-full">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon">
+                                <i class="pi pi-user"></i>
+                            </span>
+                            <input type="text" formControlName="username" placeholder="Usuario" pInputText>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon">
+                                <i class="pi pi-lock"></i>
+                            </span>
+                            <input type="password" formControlName="password" placeholder="Contraseña" pInputText>
+                        </div>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon">
-                            <i class="pi pi-lock"></i>
-                        </span>
-                        <input type="password" formControlName="password" placeholder="Contraseña" pInputText>
-                    </div>
+                <div class="flex justify-content-center">
+                    <button pButton type="button" (click)="login()" label="Login" class="p-button-outlined p-button-rounded"></button>
                 </div>
-            </div>
-            <div class="flex justify-content-center">
-                <p-button (click)="login()" label="Login"></p-button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
