@@ -25,6 +25,8 @@ import { TableModule } from "primeng/table";
 import { CardModule } from "primeng/card";
 import { MenuModule } from "primeng/menu";
 import { MenubarModule } from "primeng/menubar";
+import {SlideMenuModule} from "primeng/slidemenu";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { MenubarModule } from "primeng/menubar";
         TableModule,
         CardModule,
         MenuModule,
-        MenubarModule
+        MenubarModule,
+        SlideMenuModule,
+        DialogModule
     ],
   providers: [ApiService],
   bootstrap: [AppComponent]
