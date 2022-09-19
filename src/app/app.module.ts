@@ -22,7 +22,11 @@ import { ApiService } from "./providers/api.service";
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
+import { CardModule } from "primeng/card";
+import { MenuModule } from "primeng/menu";
+import { MenubarModule } from "primeng/menubar";
 import {SlideMenuModule} from "primeng/slidemenu";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -38,8 +42,8 @@ import {SlideMenuModule} from "primeng/slidemenu";
     PeliculaComponent,
     FuncionComponent,
     VentaProductoComponent,
-    VentaBoletaComponent,
- ],
+    VentaBoletaComponent
+  ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -50,7 +54,11 @@ import {SlideMenuModule} from "primeng/slidemenu";
         InputTextModule,
         ButtonModule,
         TableModule,
+        CardModule,
+        MenuModule,
+        MenubarModule,
         SlideMenuModule,
+        DialogModule
     ],
   providers: [ApiService],
   bootstrap: [AppComponent]

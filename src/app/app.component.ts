@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ApiService} from "./providers/api.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cinetic_fnt';
+
+  constructor(public api: ApiService) {
+  }
 }
