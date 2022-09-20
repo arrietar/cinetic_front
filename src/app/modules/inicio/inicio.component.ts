@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../providers/api.service";
-import {tap} from "rxjs";
 
 @Component({
   selector: 'app-inicio',
@@ -11,6 +10,8 @@ export class InicioComponent implements OnInit {
 
   peliculas: any[] = []
 
+  cantidad_peliculas: number = 0
+
   constructor(private api: ApiService) {
   }
 
@@ -19,6 +20,7 @@ export class InicioComponent implements OnInit {
       next: data => {
         console.log(data)
         this.peliculas = data;
+        this.cantidad_peliculas = this.peliculas.length;
       },
       error: error => {
         console.log("Error es: ", error);
