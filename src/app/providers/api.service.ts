@@ -20,9 +20,7 @@ export class ApiService {
     {
       label: 'Home',
       icon: 'fa-solid fa-home',
-      command: (event) => {
-        this.router.navigate(['/inicio'])
-      }
+      routerLink: ['/inicio']
     },
     {
       label: 'Cinema',
@@ -31,30 +29,22 @@ export class ApiService {
         {
           label: 'Cinema',
           icon: 'fa-solid fa-masks-theater',
-          command: (event) => {
-            this.router.navigate(['/cinema'])
-          }
+          routerLink: ['/cinema']
         },
         {
           label: 'Funcion',
           icon: 'fa-solid fa-clapperboard',
-          command: (event) => {
-            this.router.navigate(['/funcion'])
-          }
+          routerLink: ['/funcion']
         },
         {
           label: 'Pelicula',
           icon: 'fa-solid fa-film',
-          command: (event) => {
-            this.router.navigate(['/pelicula'])
-          }
+          routerLink: ['/pelicula']
         },
         {
           label: 'Sala',
           icon: 'fa-solid fa-video',
-          command: (event) => {
-            this.router.navigate(['/sala'])
-          }
+          routerLink: ['/sala']
         }
       ]
     },
@@ -65,16 +55,12 @@ export class ApiService {
         {
           label: 'Productos',
           icon: 'fa-solid fa-hotdog',
-          command: (event) => {
-            this.router.navigate(['/producto'])
-          }
+          routerLink: ['/producto']
         },
         {
           label: 'Combos',
           icon: 'fa-solid fa-burger',
-          command: (event) => {
-            this.router.navigate(['/combo'])
-          }
+          routerLink: ['/combo']
         }
       ]
     },
@@ -85,16 +71,12 @@ export class ApiService {
         {
           label: 'Productos',
           icon: 'fa-solid fa-burger',
-          command: (event) => {
-            this.router.navigate(['/venta_producto'])
-          }
+          routerLink: ['/venta_producto']
         },
         {
           label: 'Boletas',
           icon: 'fa-solid fa-ticket',
-          command: (event) => {
-            this.router.navigate(['/venta_boleta'])
-          }
+          routerLink: ['/venta_boleta']
         }
       ]
     },
@@ -105,15 +87,14 @@ export class ApiService {
         {
           label: 'Empleado',
           icon: 'fa-solid fa-user',
-          command: (event) => {
-            this.router.navigate(['/empleado'])
-          }
+          routerLink: ['/empleado']
         }
       ]
     },
     {
       label: 'Salir',
-      icon: 'fa-solid fa-circle-arrow-left'
+      icon: 'fa-solid fa-circle-arrow-left',
+      // routerLink: ['/login']
     }
   ];
 
@@ -126,7 +107,7 @@ export class ApiService {
   }
 
   get(endpoint: string):Observable<any[]> {
-    this.crear_header_token();
+    // this.crear_header_token();
     let url = `${this.base_url+'/'+endpoint+'/'}`
     return this.http.get(url, this.options_token).pipe(catchError(this.handleError<any>()))
   }
@@ -143,19 +124,19 @@ export class ApiService {
     return this.http.patch(url, dJason, this.options_token).pipe(catchError(this.handleError<any>()))
   }
 
-  guardar_token(token: string) {
-      localStorage.setItem('token_user', token)
-  }
+  // guardar_token(token: string) {
+  //     localStorage.setItem('token_user', token)
+  // }
 
-  private crear_header_token() {
-    const token = localStorage.getItem('token_user') || 'no_token';
+  crear_header_token(token:any) {
+    // const token = localStorage.getItem('token_user') || 'no_token';
     this.header_token = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Token ${token}`);
     this.options_token = { headers: this.header_token };
   }
 
   private handleError<T> (result?: T) {
     return (error: any): Observable<T> => {
-      console.log(error.error)
+      // console.log(error.error)
       return of(result as T);
     };
   }
