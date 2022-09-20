@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from "../../providers/api.service";
 
 @Component({
   selector: 'app-inicio',
@@ -7,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  peliculas: any[] = []
+
+  cantidad_peliculas: number = 0
+
+  constructor(private api: ApiService) {
+  }
 
   ngOnInit(): void {
-    console.log('Inicio Component')
+    this.api.get('pelicula').subscribe({
+      next: data => {
+        console.log(data)
+        this.peliculas = data;
+        this.cantidad_peliculas = this.peliculas.length;
+      },
+      error: error => {
+        console.log("Error es: ", error);
+      }
+    })
   }
 
 }

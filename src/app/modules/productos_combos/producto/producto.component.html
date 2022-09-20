@@ -1,8 +1,8 @@
 <div class="flex justify-content-center align-items-center w-screen h-screen">
-    <p-table [value]="crud.datos" responsiveLayout="scroll" class="w-8 h-min">
+    <p-table [value]="productos" responsiveLayout="scroll" class="w-8 h-min">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
-                <p-button (click)="crud.form_producto.reset(); crud.ver_formulario=true" label="Adicionar"></p-button>
+                <p-button (click)="form_producto.reset(); ver_formulario=true" label="Adicionar"></p-button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -24,13 +24,13 @@
                 <td> {{producto.valor_venta}} </td>
                 <td> {{producto.ciudad}} </td>
                 <td> {{producto.inventario}} </td>
-                <td><p-button (click)="crud.llenar_form(producto); crud.ver_formulario=true" label="Editar"></p-button></td>
+                <td><p-button (click)="llenar_form(producto); ver_formulario=true" label="Editar"></p-button></td>
             </tr>
         </ng-template>
     </p-table>
 </div>
-<p-dialog header="Formulario de Producto" [(visible)]="crud.ver_formulario">
-    <form [formGroup]="crud.form_producto">
+<p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
+    <form [formGroup]="form_producto">
         <div class="grid p-fluid">
             <div class="col-12 md:col-4">
                 <input type="text" formControlName="codigo_producto" placeholder="Codigo producto" pInputText>
@@ -52,5 +52,5 @@
             </div>
         </div>
     </form>
-    <p-button (click)="crud.guardar_actualizar_producto()" label="Guardar"></p-button>
+    <p-button (click)="guardar_actualizar_producto()" label="Guardar"></p-button>
 </p-dialog>

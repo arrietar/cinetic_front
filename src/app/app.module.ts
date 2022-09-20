@@ -16,7 +16,7 @@ import { FuncionComponent } from './modules/cinema_funciones/funcion/funcion.com
 import { VentaProductoComponent } from './modules/ventas/venta-producto/venta-producto.component';
 import { VentaBoletaComponent } from './modules/ventas/venta-boleta/venta-boleta.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ApiService } from "./providers/api.service";
 import { InputTextModule } from "primeng/inputtext";
@@ -27,6 +27,7 @@ import { MenuModule } from "primeng/menu";
 import { MenubarModule } from "primeng/menubar";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {DialogModule} from "primeng/dialog";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,12 @@ import {DialogModule} from "primeng/dialog";
         SlideMenuModule,
         DialogModule
     ],
-  providers: [ApiService],
-  bootstrap: [AppComponent]
+  providers: [
+    ApiService,
+    {provide: HTTP_INTERCEPTORS, useClass:  AuthInterceptor, multi: true}
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

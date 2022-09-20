@@ -1,6 +1,8 @@
-
-<div *ngIf="api.usuario">
-    <p-slideMenu #menu [model]="api.items" [popup]="true"></p-slideMenu>
+<div *ngIf="api.usuario" class="menu_button">
+    <p-slideMenu #menu [model]="api.items" [popup]="true" [viewportHeight]="380"></p-slideMenu>
     <button #btn type="button" pButton icon="pi pi-list" label="Menu" (click)="menu.toggle($event)"></button>
+</div>
+<div *ngIf="api.usuario" class="flex justify-content-center text-200 text-6xl">
+  CineTIC
 </div>
 <router-outlet></router-outlet>

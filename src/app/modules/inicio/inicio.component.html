@@ -1,17 +1,7 @@
 <div class="flex flex-column justify-content-center w-screen h-screen" style="font-family: 'Ruda', sans-serif;">
-    <div class="flex justify-content-center text-200 text-6xl">
-        CineTIC
-    </div>
     <div class="billboard">
         <div class="box">
-            <span style="--i: 1;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 1"></span>
-            <span style="--i: 2;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 2"></span>
-            <span style="--i: 3;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 3"></span>
-            <span style="--i: 4;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 4"></span>
-            <span style="--i: 5;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 5"></span>
-            <span style="--i: 6;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 6"></span>
-            <span style="--i: 7;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 7"></span>
-            <span style="--i: 8;"><img src="https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/170636/170636.jpg" alt="pelicula 8"></span>
+            <span *ngFor="let pelicula of peliculas, index as _i " style="--i: {{_i}}; --cantidadPeliculas: {{cantidad_peliculas}};"><img src="{{pelicula.caratula}}" alt="{{pelicula.nombre_pelicula}}"></span>
         </div>
     </div>
 </div>
