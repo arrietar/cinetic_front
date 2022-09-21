@@ -1,4 +1,4 @@
-<div class="flex flex-column justify-content-center w-screen h-screen" style="font-family: 'Ruda', sans-serif;">
+<div class="flex flex-column justify-content-center">
     <div class="billboard">
         <div class="box">
             <span *ngFor="let pelicula of peliculas, index as _i " style="--i: {{_i}}; --cantidadPeliculas: {{cantidad_peliculas}};"><img src="{{pelicula.caratula}}" alt="{{pelicula.nombre_pelicula}}"></span>

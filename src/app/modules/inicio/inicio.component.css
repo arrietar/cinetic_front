@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     background-color: black;
 }
 
@@ -41,7 +41,7 @@
     transform-origin: center;
     transform-style: preserve-3d;
     transform: rotateY(calc(var(--i) * ( 360 / var(--cantidadPeliculas) ) * 1deg)) translateZ(400px);
-    /* -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, #0004); */
+    -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, #0004);
 }
 
 .box span img {

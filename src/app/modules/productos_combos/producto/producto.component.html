@@ -1,34 +1,32 @@
-<div class="flex justify-content-center align-items-center w-screen h-screen">
-    <p-table [value]="productos" responsiveLayout="scroll" class="w-8 h-min">
-        <ng-template pTemplate="caption">
-            <div class="flex align-items-center justify-content-between">
-                <p-button (click)="form_producto.reset(); ver_formulario=true" label="Adicionar"></p-button>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th> Codigo </th>
-                <th> Nombre </th>
-                <th> Valor de Compra </th>
-                <th> Valor de Venta </th>
-                <th> Ciudad </th>
-                <th> Cantidad </th>
-                <th> Accion </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-producto>
-            <tr>
-                <td> {{producto.codigo_producto}} </td>
-                <td> {{producto.nombre_producto}} </td>
-                <td> {{producto.valor_compra}} </td>
-                <td> {{producto.valor_venta}} </td>
-                <td> {{producto.ciudad}} </td>
-                <td> {{producto.inventario}} </td>
-                <td><p-button (click)="llenar_form(producto); ver_formulario=true" label="Editar"></p-button></td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+<p-table [value]="datos" responsiveLayout="scroll" class="w-max h-min">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-left">
+            <p-button icon="fa-solid fa-circle-plus" label="Adicionar" (click)="form_producto.reset(); ver_formulario=true"></p-button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th> Codigo </th>
+            <th> Nombre </th>
+            <th> Valor de Compra </th>
+            <th> Valor de Venta </th>
+            <th> Ciudad </th>
+            <th> Cantidad </th>
+            <th> Accion </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-producto>
+        <tr>
+            <td> {{producto.codigo_producto}} </td>
+            <td> {{producto.nombre_producto}} </td>
+            <td> {{producto.valor_compra}} </td>
+            <td> {{producto.valor_venta}} </td>
+            <td> {{producto.ciudad}} </td>
+            <td> {{producto.inventario}} </td>
+            <td><p-button icon="fa-solid fa-pencil" label="Editar" (click)="llenar_form(producto); ver_formulario=true"></p-button></td>
+        </tr>
+    </ng-template>
+</p-table>
 <p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
     <form [formGroup]="form_producto">
         <div class="grid p-fluid">
@@ -52,5 +50,5 @@
             </div>
         </div>
     </form>
-    <p-button (click)="guardar_actualizar_producto()" label="Guardar"></p-button>
+    <p-button icon="fa-solid fa-floppy-disk" label="Guardar" (click)="guardar_actualizar_producto()"></p-button>
 </p-dialog>
