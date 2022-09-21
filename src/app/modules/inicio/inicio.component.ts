@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../providers/api.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-inicio',
@@ -12,7 +13,7 @@ export class InicioComponent implements OnInit {
 
   cantidad_peliculas: number = 0
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,6 +27,10 @@ export class InicioComponent implements OnInit {
         console.log("Error es: ", error);
       }
     })
+  }
+
+  navegarCartelera() {
+    this.router.navigate(['/pelicula'])
   }
 
 }
