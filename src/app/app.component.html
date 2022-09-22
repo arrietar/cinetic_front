@@ -1,8 +1,15 @@
-<div *ngIf="api.usuario" class="menu_button">
-    <p-slideMenu #menu [model]="api.items" [popup]="true" [viewportHeight]="380"></p-slideMenu>
-    <button #btn type="button" pButton icon="pi pi-list" label="Menu" (click)="menu.toggle($event)"></button>
+<div class="flex flex-column justify-content-center align-items-center w-screen h-screen p-3" style="font-family: 'Ruda', sans-serif;">
+    <div *ngIf="api.usuario" class="fixed z-5" style="top: 10px; left: 10px;">
+        <p-slideMenu #menu [model]="api.items" [popup]="true" [viewportHeight]="380"></p-slideMenu>
+        <button #btn type="button" class="bg-cyan-700" pButton icon="pi pi-list" label="Menu" (click)="menu.toggle($event)"></button>
+    </div>
+    <div *ngIf="api.usuario" class="flex text-6xl">
+        CineTIC
+    </div>
+    <div class="flex flex-grow-1 justify-content-center align-items-center">
+        <router-outlet></router-outlet>
+    </div>
+    <div *ngIf="api.usuario" class="flex w-full h-3rem p-3 justify-content-center">
+        MisionTIC - Grupo 1 - 2022 - Todos los derechos reservados
+    </div>
 </div>
-<div *ngIf="api.usuario" class="flex justify-content-center text-200 text-6xl">
-  CineTIC
-</div>
-<router-outlet></router-outlet>
