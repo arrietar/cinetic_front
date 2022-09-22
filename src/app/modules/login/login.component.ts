@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../providers/api.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessageService} from "primeng/api";
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
 
@@ -15,23 +19,32 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required] // Deben tener el mismo nombre que tienen en la base de datos
   })
 
-  constructor(private api:ApiService, private fb: FormBuilder, private router: Router) { }
+  constructor(private api: ApiService,
+              private fb: FormBuilder,
+              private router: Router,
+              private messageService: MessageService) {
+  }
 
   ngOnInit(): void {
   }
 
   login() {
     this.api.login(this.form_usuario.value)
-        .subscribe(
-            data => {
-              if(data != undefined) {
-                this.api.usuario = data
-                this.api.crear_header_token(data.token)
-                this.router.navigate(['/inicio'])
-              } else {
-                this.router.navigate(['/login'])
-              }
-            }
-        )
+      .subscribe(  {
+        next: (data: any) => {
+          if (data != undefined) {
+            this.api.usuario = data
+            this.api.crear_header_token(data.token)
+            this.router.navigate(['/inicio'])
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Login error: '+ error.message,
+            })
+            this.form_usuario.reset();
+        }
+      })
   }
 }

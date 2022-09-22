@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable, of} from "rxjs";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {catchError, throwError} from "rxjs";
 import {MenuItem} from 'primeng/api';
-import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -94,34 +93,37 @@ export class ApiService {
     {
       label: 'Salir',
       icon: 'fa-solid fa-circle-arrow-left',
-      // routerLink: ['/login']
+      command: () => {
+        this.usuario = undefined;
+      },
+      routerLink: ['/login']
     }
   ];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   login(data:any) {
     let url = `${this.base_url + '/login'}`
     let credenciales = JSON.stringify(data)
-    return this.http.post(url, credenciales, this.options_login).pipe(catchError(this.handleError<any>()))
+    return this.http.post(url, credenciales, this.options_login).pipe(catchError(this.handleError));
   }
 
-  get(endpoint: string):Observable<any[]> {
+  get(endpoint: string){
     // this.crear_header_token();
     let url = `${this.base_url+'/'+endpoint+'/'}`
-    return this.http.get(url, this.options_token).pipe(catchError(this.handleError<any>()))
+    return this.http.get(url, this.options_token).pipe(catchError(this.handleError));
   }
 
   add(endpoint: string, data: any) {
     let url = `${this.base_url+'/'+endpoint+'/'}`
     let dJason = JSON.stringify(data)
-    return this.http.post(url, dJason, this.options_token).pipe(catchError(this.handleError<any>()))
+    return this.http.post(url, dJason, this.options_token).pipe(catchError(this.handleError))
   }
 
   update(endpoint: string, id: any, data: any) {
     let url = `${this.base_url+'/'+endpoint+'/'+id+'/'}`
     let dJason = JSON.stringify(data)
-    return this.http.patch(url, dJason, this.options_token).pipe(catchError(this.handleError<any>()))
+    return this.http.patch(url, dJason, this.options_token).pipe(catchError(this.handleError))
   }
 
   // guardar_token(token: string) {
@@ -134,11 +136,25 @@ export class ApiService {
     this.options_token = { headers: this.header_token };
   }
 
-  private handleError<T> (result?: T) {
-    return (error: any): Observable<T> => {
-      // console.log(error.error)
-      return of(result as T);
-    };
+  // private handleError<T> (result?: T) {
+  //   return (error: any): Observable<T> => {
+  //     // console.log(error.error)
+  //     return of(result as T);
+  //   };
+  // }
+
+  private handleError(error: HttpErrorResponse) {
+    // if (error.status === 0) {
+    //   // A client-side or network error occurred. Handle it accordingly.
+    //   console.error('An error occurred:', error.error);
+    // } else {
+    //   // The backend returned an unsuccessful response code.
+    //   // The response body may contain clues as to what went wrong.
+    //   console.error(
+    //     `Backend returned code ${error.status}, body was: `, error.error);
+    // }
+    // Return an observable with a user-facing error message.
+    return throwError(() => error);
   }
 
 }

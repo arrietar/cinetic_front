@@ -10,7 +10,7 @@ import {ApiService} from "../../../providers/api.service";
 })
 export class ProductoComponent implements OnInit {
 
-  datos: any = [];
+  productos: any = [];
 
   form_producto = this.fb.group({
     id: [''],
@@ -23,7 +23,7 @@ export class ProductoComponent implements OnInit {
   })
 
   ver_formulario: boolean = false;
-  
+
   constructor(private router: Router, private api: ApiService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class ProductoComponent implements OnInit {
     this.api.get('producto')
         .subscribe(data=>{
           if (data != undefined) {
-            this.datos = data
+            this.productos = data
           }
         })
   }

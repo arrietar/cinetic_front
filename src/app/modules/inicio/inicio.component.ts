@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class InicioComponent implements OnInit {
 
-  peliculas: any[] = []
+  peliculas: any;
 
   cantidad_peliculas: number = 0
 
@@ -18,7 +18,7 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.get('pelicula').subscribe({
-      next: data => {
+      next: (data:any) => {
         console.log(data)
         this.peliculas = data;
         this.cantidad_peliculas = this.peliculas.length;
