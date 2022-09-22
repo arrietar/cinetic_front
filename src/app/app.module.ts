@@ -28,6 +28,7 @@ import { MenubarModule } from "primeng/menubar";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {DialogModule} from "primeng/dialog";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
         MenuModule,
         MenubarModule,
         SlideMenuModule,
-        DialogModule
+        DialogModule,
+        ToastModule
     ],
   providers: [
     ApiService,

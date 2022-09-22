@@ -8,7 +8,7 @@ import {ApiService} from "../../../providers/api.service";
 })
 export class PeliculaComponent implements OnInit {
 
-  peliculas: any[] = []
+  peliculas: any;
 
   constructor(private api:ApiService) { }
 
