@@ -114,9 +114,19 @@ export class ApiService {
     return this.http.get(url, this.options_token).pipe(catchError(this.handleError));
   }
 
-  add(endpoint: string, data: any) {
+  add(endpoint: string, data: any, isUpload: boolean = false) {
     let url = `${this.base_url+'/'+endpoint+'/'}`
     let dJason = JSON.stringify(data)
+
+    if (isUpload) {
+      this.header_token = new HttpHeaders().set('Authorization', `Token ${this.usuario.token}`).set('Content-Type', 'multipart/form-data');
+    }else{
+      this.header_token = new HttpHeaders().set('Authorization', `Token ${this.usuario.token}`).set('Content-Type', 'application/json');
+    }
+    this.options_token = {headers: this.header_token};
+
+    console.log(this.options_token);
+
     return this.http.post(url, dJason, this.options_token).pipe(catchError(this.handleError))
   }
 
@@ -130,7 +140,7 @@ export class ApiService {
   //     localStorage.setItem('token_user', token)
   // }
 
-  crear_header_token(token:any) {
+  crear_header_token(token:any, isUpload: boolean = false) {
     // const token = localStorage.getItem('token_user') || 'no_token';
     this.header_token = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Token ${token}`);
     this.options_token = { headers: this.header_token };

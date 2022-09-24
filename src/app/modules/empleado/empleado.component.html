@@ -44,7 +44,7 @@
         <input type="phone" formControlName="telefono" placeholder="Telefono" pInputText>
       </div>
       <div class="col-12 md:col-4">
-        <input type="date" formControlName="fecha_nacimiento" placeholder="Fecha de Nacimiento" pInputText>
+        <p-calendar formControlName="fecha_nacimiento" [showIcon]="true" [touchUI]="true" [readonlyInput]="true" inputId="touchui"></p-calendar>
       </div>
       <div class="col-12 md:col-4">
         <input type="text" formControlName="username" placeholder="Username" pInputText>

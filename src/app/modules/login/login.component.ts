@@ -15,8 +15,8 @@ import {MessageService} from "primeng/api";
 export class LoginComponent implements OnInit {
 
   form_usuario = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required] // Deben tener el mismo nombre que tienen en la base de datos
+    username: ['admin', Validators.required],
+    password: ['AbcD1234!', Validators.required] // Deben tener el mismo nombre que tienen en la base de datos
   })
 
   constructor(private api: ApiService,

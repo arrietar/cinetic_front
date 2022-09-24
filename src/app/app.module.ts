@@ -29,6 +29,9 @@ import {SlideMenuModule} from "primeng/slidemenu";
 import {DialogModule} from "primeng/dialog";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {ToastModule} from 'primeng/toast';
+import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import {ToastModule} from 'primeng/toast';
         MenubarModule,
         SlideMenuModule,
         DialogModule,
-        ToastModule
+        ToastModule,
+        CalendarModule,
+        DropdownModule,
+        InputTextareaModule
     ],
   providers: [
     ApiService,

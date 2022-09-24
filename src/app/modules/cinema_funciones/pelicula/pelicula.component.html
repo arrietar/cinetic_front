@@ -1,24 +1,63 @@
-<p-table [value]="peliculas" responsiveLayout="scroll">
-  <ng-template pTemplate="header">
-    <tr>
-      <th> Codigo </th>
-      <th> Nombre </th>
-      <th> Genero </th>
-      <th> Clasificacion </th>
-      <th> Fecha Filmacion </th>
-      <th> Duracion </th>
-      <th> Caratula </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-pelicula>
-    <tr>
-      <td>{{pelicula.codigo_pelicula}}</td>
-      <td>{{pelicula.nombre_pelicula}}</td>
-      <td>{{pelicula.genero}}</td>
-      <td>{{pelicula.clasificacion}}</td>
-      <td>{{pelicula.fecha_filmacion}}</td>
-      <td>{{pelicula.duracion}}</td>
-      <td><a href="{{pelicula.caratula}}" target="_blank">{{pelicula.caratula}}</a></td>
-    </tr>
-  </ng-template>
-</p-table>
+<div class="flex justify-content-center align-items-center w-screen h-screen">
+  <p-table [value]="peliculas" responsiveLayout="scroll" class="w-8 h-min">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <p-button (click)="form_pelicula.reset(); ver_formulario=true" label="Adicionar"></p-button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th> Codigo </th>
+        <th> Nombres </th>
+        <th> Genero </th>
+        <th> Clasificacion </th>
+        <th> Duracion </th>
+        <th> Accion </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pelicula>
+      <tr>
+        <td> {{pelicula.codigo_pelicula}} </td>
+        <td> {{pelicula.nombre_pelicula}}</td>
+        <td> {{pelicula.genero}} </td>
+        <td> {{pelicula.clasificacion}} </td>
+        <td> {{pelicula.duracion}} </td>
+        <td><p-button (click)="llenar_form(pelicula); ver_formulario=true" label="Editar"></p-button></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
+  <form [formGroup]="form_pelicula" enctype="multipart/form-data">
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-4">
+        <input type="text" formControlName="codigo_pelicula" placeholder="Codigo Pelicula" pInputText>
+      </div>
+      <div class="col-12 md:col-4">
+        <input type="text" formControlName="nombre_pelicula" placeholder="Nombre Pelicula" pInputText>
+      </div>
+      <div class="col-12 md:col-4">
+        <p-dropdown [options]="generos" formControlName="genero" optionLabel="name" optionValue="code"></p-dropdown>
+      </div>
+      <div class="col-12 md:col-4">
+        <p-dropdown [options]="clasificaciones" formControlName="clasificacion" optionLabel="name" optionValue="code"></p-dropdown>
+      </div>
+      <div class="col-12 md:col-4">
+        <input type="date" formControlName="fecha_filmacion" pInputText>
+      </div>
+      <div class="col-12 md:col-4">
+        <input type="number" formControlName="duracion" placeholder="Duracion (min)" pInputText>
+      </div>
+      <div class="col-12 md:col-4">
+        <input type="file" placeholder="Foto Caratula" pInputText (change)="onImageChange($event)">
+      </div>
+      <div class="col-12 md:col-4">
+        <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true"></textarea>
+      </div>
+    </div>
+  </form>
+  <p-button (click)="guardar_actualizar_pelicula()" label="Guardar"></p-button>
+</p-dialog>
+
+<p-toast></p-toast>
