@@ -108,27 +108,34 @@ export class ApiService {
     return this.http.post(url, credenciales, this.options_login).pipe(catchError(this.handleError));
   }
 
-  get(endpoint: string){
+  get(endpoint: string, id:number=0){
     // this.crear_header_token();
-    let url = `${this.base_url+'/'+endpoint+'/'}`
+    let url:any;
+
+    if (id > 0) {
+      url = `${this.base_url+'/'+endpoint+'/'+id+'/'}`;
+    }
+    else{
+      url = `${this.base_url+'/'+endpoint+'/'}`;
+    }
+
     return this.http.get(url, this.options_token).pipe(catchError(this.handleError));
   }
 
-  add(endpoint: string, data: any) {
+  add(endpoint: string, data: any, isUploadFile: boolean = false) {
     let url = `${this.base_url+'/'+endpoint+'/'}`
-    let dJason = JSON.stringify(data)
-    return this.http.post(url, dJason, this.options_token).pipe(catchError(this.handleError))
+
+    let formFormat = this.validIsMultipartOrJson(isUploadFile, data)
+    return this.http.post(url, formFormat.dataFormat, {headers: formFormat.header_token}).pipe(catchError(this.handleError))
   }
 
-  update(endpoint: string, id: any, data: any) {
+  update(endpoint: string, id: any, data: any, isUploadFile: boolean = false) {
     let url = `${this.base_url+'/'+endpoint+'/'+id+'/'}`
-    let dJason = JSON.stringify(data)
-    return this.http.patch(url, dJason, this.options_token).pipe(catchError(this.handleError))
-  }
 
-  // guardar_token(token: string) {
-  //     localStorage.setItem('token_user', token)
-  // }
+
+    let formFormat = this.validIsMultipartOrJson(isUploadFile, data)
+    return this.http.patch(url, formFormat.dataFormat, {headers: formFormat.header_token}).pipe(catchError(this.handleError))
+  }
 
   crear_header_token(token:any) {
     // const token = localStorage.getItem('token_user') || 'no_token';
@@ -142,6 +149,25 @@ export class ApiService {
   //     return of(result as T);
   //   };
   // }
+
+  private validIsMultipartOrJson(isMultipart: boolean = false, data: any){
+
+    let dataFormat;
+    let header_token;
+
+    if (isMultipart) {
+      header_token = new HttpHeaders().set('Authorization', `Token ${this.usuario.token}`);
+      dataFormat = data;
+    }else{
+      header_token = new HttpHeaders().set('Authorization', `Token ${this.usuario.token}`).set('Content-Type', 'application/json');
+      dataFormat = JSON.stringify(data);
+    }
+
+    return {
+      dataFormat,
+      header_token
+    };
+  }
 
   private handleError(error: HttpErrorResponse) {
     // if (error.status === 0) {

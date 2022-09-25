@@ -1,1 +1,42 @@
-<p>combo works!</p>
+<div class="flex justify-content-center align-items-center w-screen h-screen">
+    <p-table [value]="combos" responsiveLayout="scroll" class="w-8 h-min">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <p-button (click)="form_combo.reset(); ver_formulario=true" label="Adicionar"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th> Codigo </th>
+                <th> Nombre </th>
+                <th> Descuento </th>
+                <th> Accion </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-combo>
+            <tr>
+                <td> {{combo.codigo_combo}} </td>
+                <td> {{combo.nombre_combo}} </td>
+                <td> {{combo.descuento}} </td>
+                <td><p-button (click)="llenar_form(combo); ver_formulario=true" label="Editar"></p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
+    <form [formGroup]="form_combo">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="codigo_combo" placeholder="Codigo combo" pInputText>
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="nombre_combo" placeholder="Nombre combo" pInputText>
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="descuento" placeholder="Descuento" pInputText>
+            </div>
+        </div>
+    </form>
+    <p-button (click)="guardar_actualizar_combo()" label="Guardar"></p-button>
+</p-dialog>
+

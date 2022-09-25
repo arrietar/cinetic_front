@@ -19,7 +19,6 @@ export class InicioComponent implements OnInit {
   ngOnInit(): void {
     this.api.get('pelicula').subscribe({
       next: (data:any) => {
-        console.log(data)
         this.peliculas = data;
         this.cantidad_peliculas = this.peliculas.length;
       },
