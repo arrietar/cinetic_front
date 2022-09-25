@@ -13,7 +13,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class PeliculaComponent implements OnInit {
 
-  peliculas: any;
+  peliculas: any[] = [];
   generos: any[];
   clasificaciones: any[];
   formDataPelicula: FormData | undefined;
@@ -60,15 +60,18 @@ export class PeliculaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listar_pelculas();
+    this.listar_peliculas();
   }
 
-  listar_pelculas() {
+  listar_peliculas() {
     this.api.get('pelicula')
       .subscribe({
         next: (data: any) => {
+          console.log(data)
           if (data != undefined) {
-            this.peliculas = data;
+            // Para que funcione la tabla de ngPrime, se requeire de un tipo Array
+            // Cuando se hace un Get con un id de especifico, retorna un dato no Array, por eso la validacion
+            this.peliculas =  Array.isArray(data)? data : [data];
           }
         },
         error: (error: HttpErrorResponse) => {
@@ -125,7 +128,7 @@ export class PeliculaComponent implements OnInit {
             this.ver_formulario = false;
             this.form_pelicula.reset();
             this.formPelicula.nativeElement.reset();
-            this.listar_pelculas();
+            this.listar_peliculas();
           }
         },
         error: (error: HttpErrorResponse) => {
@@ -150,7 +153,7 @@ export class PeliculaComponent implements OnInit {
             this.ver_formulario = false;
             this.form_pelicula.reset();
             this.formPelicula.nativeElement.reset();
-            this.listar_pelculas();
+            this.listar_peliculas();
           }
         },
         error: (error: HttpErrorResponse) => {
