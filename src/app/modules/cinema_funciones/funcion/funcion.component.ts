@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../../../providers/api.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -16,6 +16,7 @@ export class FuncionComponent implements OnInit {
   funciones: any[] = [];
   salas: any[] =[];
   peliculas: any[] = [];
+  formDataFuncion: FormData | undefined;
 
   form_funcion = this.fb.group({
     id: [''],
@@ -27,6 +28,7 @@ export class FuncionComponent implements OnInit {
   })
 
   ver_formulario: boolean = false;
+  @ViewChild('formFuncion') formFuncion:any;
 
   constructor(
       private router: Router,
@@ -44,6 +46,38 @@ export class FuncionComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar_funciones();
+    this.lista_salas();
+    this.lista_peliculas();
+  }
+
+  private lista_salas() {
+    this.api.get('sala')
+        .subscribe({
+          next: (data: any) => {
+            data.forEach((d: any)=>{
+              this.salas.push({
+                code: d.id,
+                name: d.nombre_sala,
+              })
+            })
+            console.log(this.salas)
+          }
+        })
+  }
+
+  private lista_peliculas() {
+    this.api.get('pelicula')
+        .subscribe({
+          next: (data: any) => {
+            data.forEach((d: any)=>{
+              this.peliculas.push({
+                code: d.id,
+                name: d.nombre_pelicula,
+              })
+            })
+            console.log(this.peliculas)
+          }
+        })
   }
 
   listar_funciones() {
@@ -52,19 +86,6 @@ export class FuncionComponent implements OnInit {
           next: (data: any) => {
             if (data != undefined) {
               this.funciones = data;
-
-              data.forEach((d: any)=>{
-                this.salas.push({
-                  code: d.sala.id,
-                  name: d.sala.nombre_sala,
-                })
-                this.peliculas.push({
-                  code: d.pelicula.id,
-                  name: d.pelicula.nombre_pelicula,
-                })
-              })
-              console.log(this.salas)
-              console.log(this.peliculas)
             }
           },
           error: (error: HttpErrorResponse) => {
@@ -82,6 +103,76 @@ export class FuncionComponent implements OnInit {
       sala: funcion.sala.nombre_sala,
       horario: funcion.horario,
     });
+  }
+
+  guardar_actualizar_funcion() {
+    let nueva_funcion = {
+      id: this.form_funcion.value['id'],
+      codigo_funcion: this.form_funcion.value['codigo_funcion'],
+      fecha: this.form_funcion.value['fecha'],
+      id_pelicula: this.form_funcion.value['pelicula'],
+      id_sala: this.form_funcion.value['sala'],
+      horario: this.form_funcion.value['horario'],
+    }
+
+
+    if (this.form_funcion.value['id']) {
+      this.actualizar_funcion(nueva_funcion);
+    } else {
+      this.guardar_funcion(nueva_funcion);
+    }
+  }
+
+  private guardar_funcion(nueva_funcion: any) {
+    console.log(nueva_funcion)
+
+    this.api.add('funcion', nueva_funcion, true)
+        .subscribe({
+          next: (data) => {
+            console.log("Data: ", data);
+            if (data != undefined) {
+              this.messageService.add({
+                severity: 'success',
+                summary: `Funcion ${this.form_funcion.value.codigo_funcion} creada correctamente`,
+              })
+              this.ver_formulario = false;
+              this.form_funcion.reset();
+              this.formFuncion.nativeElement.reset();
+              this.listar_funciones();
+            }
+          },
+          error: (error: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: `Error al crear Funcion ${this.form_funcion.value.codigo_funcion}: ${error.message}`,
+            })
+          }
+        })
+  }
+
+  private actualizar_funcion(nueva_funcion: any) {
+
+    this.api.update('funcion', this.form_funcion.value['id'], nueva_funcion)
+        .subscribe({
+          next: (data) => {
+            if (data != undefined) {
+              this.messageService.add({
+                severity: 'success',
+                summary: `Funcion ${this.form_funcion.value.codigo_funcion} actualizada correctamente`,
+              })
+              this.ver_formulario = false;
+              this.form_funcion.reset();
+              this.formFuncion.nativeElement.reset();
+              this.listar_funciones();
+            }
+          },
+          error: (error: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: `Error al actualizar Funcion  ${this.form_funcion.value.codigo_funcion}: ${error.message}`,
+            })
+          }
+        })
   }
 
 }
