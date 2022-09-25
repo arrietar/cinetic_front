@@ -108,9 +108,17 @@ export class ApiService {
     return this.http.post(url, credenciales, this.options_login).pipe(catchError(this.handleError));
   }
 
-  get(endpoint: string){
+  get(endpoint: string, id:number=0){
     // this.crear_header_token();
-    let url = `${this.base_url+'/'+endpoint+'/'}`
+    let url:any;
+
+    if (id > 0) {
+      url = `${this.base_url+'/'+endpoint+'/'+id+'/'}`;
+    }
+    else{
+      url = `${this.base_url+'/'+endpoint+'/'}`;
+    }
+
     return this.http.get(url, this.options_token).pipe(catchError(this.handleError));
   }
 
