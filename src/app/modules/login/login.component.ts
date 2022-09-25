@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (error: HttpErrorResponse) => {
+          console.log("Error login", error)
             this.messageService.add({
               severity: 'error',
               summary: 'Login error: '+ error.message,
