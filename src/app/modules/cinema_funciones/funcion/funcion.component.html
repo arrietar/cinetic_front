@@ -27,3 +27,28 @@
         </ng-template>
     </p-table>
 </div>
+
+<p-dialog header="Formulario de Funcion" [(visible)]="ver_formulario">
+    <form [formGroup]="form_funcion" #formFuncion>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="codigo_funcion" placeholder="Codigo Funcion" pInputText>
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="date" formControlName="fecha" placeholder="Fecha" pInputText>
+            </div>
+            <div class="col-12 md:col-4">
+                <p-dropdown [options]="peliculas" formControlName="pelicula" optionLabel="name" optionValue="code"></p-dropdown>
+            </div>
+            <div class="col-12 md:col-4">
+                <p-dropdown [options]="salas" formControlName="sala" optionLabel="name" optionValue="code"></p-dropdown>
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="time" formControlName="horario" pInputText>
+            </div>
+        </div>
+        <p-button (click)="guardar_actualizar_funcion()" label="Guardar"></p-button>
+    </form>
+</p-dialog>
+
+<p-toast></p-toast>
