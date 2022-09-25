@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../../../providers/api.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -16,6 +16,7 @@ export class PeliculaComponent implements OnInit {
   peliculas: any;
   generos: any[];
   clasificaciones: any[];
+  formDataPelicula: FormData | undefined;
 
   form_pelicula = this.fb.group({
     id: [''],
@@ -30,6 +31,7 @@ export class PeliculaComponent implements OnInit {
   });
 
   ver_formulario: boolean = false;
+  @ViewChild('formPelicula') formPelicula:any;
 
   constructor(private router: Router,
               private api: ApiService,
@@ -90,6 +92,18 @@ export class PeliculaComponent implements OnInit {
   }
 
   guardar_actualizar_pelicula() {
+
+    this.formDataPelicula = new FormData();
+    this.formDataPelicula.append('id', this.form_pelicula.get('id')?.value || '')
+    this.formDataPelicula.append('codigo_pelicula', this.form_pelicula.get('codigo_pelicula')?.value || '')
+    this.formDataPelicula.append('nombre_pelicula', this.form_pelicula.get('nombre_pelicula')?.value || '')
+    this.formDataPelicula.append('genero', this.form_pelicula.get('genero')?.value || '')
+    this.formDataPelicula.append('clasificacion', this.form_pelicula.get('clasificacion')?.value || '')
+    this.formDataPelicula.append('fecha_filmacion', this.form_pelicula.get('fecha_filmacion')?.value || '')
+    this.formDataPelicula.append('sinopsis', this.form_pelicula.get('sinopsis')?.value || '')
+    this.formDataPelicula.append('duracion', this.form_pelicula.get('duracion')?.value || '')
+    this.formDataPelicula.append('caratula', this.form_pelicula.get('caratula')?.value || '')
+
     if (this.form_pelicula.value['id']) {
       this.actualizar_pelicula();
     } else {
@@ -98,17 +112,8 @@ export class PeliculaComponent implements OnInit {
   }
 
   private guardar_pelicula() {
-    let formData = new FormData();
-    formData.append('codigo_pelicula', this.form_pelicula.get('codigo_pelicula')?.value || '')
-    formData.append('nombre_pelicula', this.form_pelicula.get('nombre_pelicula')?.value || '')
-    formData.append('genero', this.form_pelicula.get('genero')?.value || '')
-    formData.append('clasificacion', this.form_pelicula.get('clasificacion')?.value || '')
-    formData.append('fecha_filmacion', this.form_pelicula.get('fecha_filmacion')?.value || '')
-    formData.append('sinopsis', this.form_pelicula.get('sinopsis')?.value || '')
-    formData.append('duracion', this.form_pelicula.get('duracion')?.value || '')
-    formData.append('caratula', this.form_pelicula.get('caratula')?.value || '')
 
-    this.api.add('pelicula', formData, true)
+    this.api.add('pelicula', this.formDataPelicula, true)
       .subscribe({
         next: (data) => {
           console.log("Data: ", data);
@@ -119,6 +124,7 @@ export class PeliculaComponent implements OnInit {
             })
             this.ver_formulario = false;
             this.form_pelicula.reset();
+            this.formPelicula.nativeElement.reset();
             this.listar_pelculas();
           }
         },
@@ -132,7 +138,8 @@ export class PeliculaComponent implements OnInit {
   }
 
   private actualizar_pelicula() {
-    this.api.update('pelicula', this.form_pelicula.value['id'], this.form_pelicula.value)
+
+    this.api.update('pelicula', this.form_pelicula.value['id'], this.formDataPelicula, true)
       .subscribe({
         next: (data) => {
           if (data != undefined) {
@@ -142,6 +149,7 @@ export class PeliculaComponent implements OnInit {
             })
             this.ver_formulario = false;
             this.form_pelicula.reset();
+            this.formPelicula.nativeElement.reset();
             this.listar_pelculas();
           }
         },
@@ -157,5 +165,6 @@ export class PeliculaComponent implements OnInit {
   onImageChange(event: any) {
     const imgFile = event.target.files[0];
     this.form_pelicula.get('caratula')?.setValue(imgFile);
+    this.form_pelicula.get('caratula')?.updateValueAndValidity();
   }
 }

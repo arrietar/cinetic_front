@@ -29,7 +29,7 @@
 </div>
 
 <p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
-  <form [formGroup]="form_pelicula" enctype="multipart/form-data">
+  <form [formGroup]="form_pelicula" #formPelicula>
     <div class="grid p-fluid">
       <div class="col-12 md:col-4">
         <input type="text" formControlName="codigo_pelicula" placeholder="Codigo Pelicula" pInputText>
@@ -52,12 +52,12 @@
       <div class="col-12 md:col-4">
         <input type="file" placeholder="Foto Caratula" pInputText (change)="onImageChange($event)">
       </div>
-      <div class="col-12 md:col-4">
-        <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true"></textarea>
+      <div class="col-12 md:col-8">
+        <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
       </div>
     </div>
+    <p-button (click)="guardar_actualizar_pelicula()" label="Guardar"></p-button>
   </form>
-  <p-button (click)="guardar_actualizar_pelicula()" label="Guardar"></p-button>
 </p-dialog>
 
 <p-toast></p-toast>
