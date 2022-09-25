@@ -19,8 +19,8 @@
             <tr>
                 <td> {{funcion.codigo_funcion}} </td>
                 <td> {{funcion.fecha}}</td>
-                <td> {{funcion.pelicula_id}} </td>
-                <td> {{funcion.sala_id}} </td>
+                <td> {{funcion.pelicula.nombre_pelicula}} </td>
+                <td> {{funcion.sala.nombre_sala}} </td>
                 <td> {{funcion.horario}} </td>
                 <td><p-button (click)="llenar_form(funcion); ver_formulario=true" label="Editar"></p-button></td>
             </tr>

@@ -13,16 +13,16 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class FuncionComponent implements OnInit {
 
-  funciones: any;
-  salas: any[];
-  peliculas: any[];
+  funciones: any[] = [];
+  salas: any[] =[];
+  peliculas: any[] = [];
 
   form_funcion = this.fb.group({
     id: [''],
     codigo_funcion: ['', Validators.required],
     fecha: ['', Validators.required],
-    pelicula_id: ['', Validators.required],
-    sala_id: ['', Validators.required],
+    pelicula: ['', Validators.required],
+    sala: ['', Validators.required],
     horario: ['', Validators.required],
   })
 
@@ -52,6 +52,19 @@ export class FuncionComponent implements OnInit {
           next: (data: any) => {
             if (data != undefined) {
               this.funciones = data;
+
+              data.forEach((d: any)=>{
+                this.salas.push({
+                  code: d.sala.id,
+                  name: d.sala.nombre_sala,
+                })
+                this.peliculas.push({
+                  code: d.pelicula.id,
+                  name: d.pelicula.nombre_pelicula,
+                })
+              })
+              console.log(this.salas)
+              console.log(this.peliculas)
             }
           },
           error: (error: HttpErrorResponse) => {
@@ -65,8 +78,8 @@ export class FuncionComponent implements OnInit {
       id: funcion.id,
       codigo_funcion: funcion.codigo_funcion,
       fecha: funcion.fecha,
-      pelicula_id: funcion.pelicula_id,
-      sala_id: funcion.sala_id,
+      pelicula: funcion.pelicula.nombre_pelicula,
+      sala: funcion.sala.nombre_sala,
       horario: funcion.horario,
     });
   }
