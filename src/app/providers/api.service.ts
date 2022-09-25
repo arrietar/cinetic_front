@@ -15,6 +15,9 @@ export class ApiService {
   header_token: any
   options_token: any
 
+  // de esta forma se declara variable tipo objeto
+  pelicula_seleccionado:any;
+
   items: MenuItem[] = [
     {
       label: 'Home',

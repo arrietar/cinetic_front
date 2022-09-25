@@ -13,7 +13,7 @@ export class InicioComponent implements OnInit {
 
   cantidad_peliculas: number = 0
 
-  constructor(private api: ApiService, private router: Router) {
+  constructor(public api: ApiService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class InicioComponent implements OnInit {
       }
     })
   }
-
+//sin usar
   navegarCartelera() {
     this.router.navigate(['/pelicula'])
   }
