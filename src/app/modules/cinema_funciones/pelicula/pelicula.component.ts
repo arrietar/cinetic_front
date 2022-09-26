@@ -67,7 +67,6 @@ export class PeliculaComponent implements OnInit {
     this.api.get('pelicula')
       .subscribe({
         next: (data: any) => {
-          console.log(data)
           if (data != undefined) {
             // Para que funcione la tabla de ngPrime, se requeire de un tipo Array
             // Cuando se hace un Get con un id de especifico, retorna un dato no Array, por eso la validacion

@@ -27,11 +27,13 @@ import { MenuModule } from "primeng/menu";
 import { MenubarModule } from "primeng/menubar";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {DialogModule} from "primeng/dialog";
-import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {ErrorInterceptor} from "./interceptors/error.interceptor";
 import {ToastModule} from 'primeng/toast';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ErrorService} from "./providers/error.service";
+import {SplitterModule} from "primeng/splitter";
 
 @NgModule({
   declarations: [
@@ -67,11 +69,13 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
         ToastModule,
         CalendarModule,
         DropdownModule,
-        InputTextareaModule
+        InputTextareaModule,
+        SplitterModule,
     ],
   providers: [
     ApiService,
-    {provide: HTTP_INTERCEPTORS, useClass:  AuthInterceptor, multi: true}
+    ErrorService,
+    {provide: HTTP_INTERCEPTORS, useClass:  ErrorInterceptor, multi: true}
   ],
   bootstrap: [
     AppComponent
