@@ -33,6 +33,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ErrorService} from "./providers/error.service";
+import {SplitterModule} from "primeng/splitter";
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {ErrorService} from "./providers/error.service";
         ToastModule,
         CalendarModule,
         DropdownModule,
-        InputTextareaModule
+        InputTextareaModule,
+        SplitterModule,
     ],
   providers: [
     ApiService,
