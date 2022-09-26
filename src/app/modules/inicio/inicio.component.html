@@ -1,7 +1,7 @@
 <div class="flex flex-column justify-content-center">
     <div class="billboard">
         <div class="box">
-            <span *ngFor="let pelicula of peliculas, index as _i " style="--i: {{_i}}; --cantidadPeliculas: {{cantidad_peliculas}};"><img src="{{pelicula.caratula}}" alt="{{pelicula.nombre_pelicula}}" [routerLink]="'/venta_boleta'" (click)="api.pelicula_seleccionado = pelicula"></span>
+            <span *ngFor="let pelicula of peliculas, index as _i " style="--i: {{_i}}; --cantidadPeliculas: {{cantidad_peliculas}};"><img src="{{pelicula.caratula}}" alt="{{pelicula.nombre_pelicula}}" [routerLink]="'/venta_boleta'"></span>
         </div>
     </div>
 </div>
