@@ -1,5 +1,5 @@
 <!-- MUESTRA LA FUNCION DE LA PELICULA SELECCIONADA-->
-<!--<p-dialog header="Formulario de Funcion" [(visible)]="ver_formulario">-->
+
 <div class="flex justify-content-center w-screen my-8">
     <p-table [value]="funciones" responsiveLayout="scroll" class="w-8 h-min">
         <ng-template pTemplate="caption">
@@ -31,57 +31,10 @@
     </p-table>
 </div>
 
-<!--MUESTRA LA INFORMACION EN TABLA-->
-<!--
-<p-dialog  [(visible)]="ver_formulario">
-    <div class="flex justify-content-center align-items-center w-screen h-screen">
-        <p-table [value]="funcion_pelicula"  class="w-8 h-min">
-            <ng-template pTemplate="caption">
-                Pelicula
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th> Pelicula </th>
-                    <th> Caratula </th>
-                    <th> Sinopsis</th>
-                    <th> Sala </th>
-                    <th> capacidad </th>
-                    <th> Fecha </th>
-                    <th> Horario </th>
-                    <th> # Boletas </th>
-                    <th> Accion </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-funcion_peli>
-                <tr >
-                    <td> {{funcion_peli.pelicula.nombre_pelicula}} </td>
-                    <td>  <img src="{{funcion_peli.pelicula.caratula}}"width="150" height="150"></td>
-                    <td> {{funcion_peli.pelicula.sinopsis}} </td>
-                    <td> {{funcion_peli.sala.nombre_sala}} </td>
-                    <td> {{funcion_peli.sala.capacidad}} </td>
-                    <td> {{funcion_peli.fecha}} </td>
-                    <td> {{funcion_peli.horario}} </td>
-                    <td>
+<!--MUESTRA LA INFORMACION EN EL FORMULARIO -->
 
-                        &lt;!&ndash;<p-inputNumber [(ngModel)]="value3" [min]="1" [max]="100" [showButtons]="true" buttonLayout="vertical"
-                                       spinnerMode="vertical" inputId="vertical"decrementButtonClass="p-button-secondary"
-                                       incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
-                                       decrementButtonIcon="pi pi-minus">
-                        </p-inputNumber>&ndash;&gt;
+<p-dialog header="Venta de Boleta" [(visible)]="ver_formulario ">
 
-
-                    </td>
-                    <td>
-                        <p-button (click)="obtener(); ver_formulario=true" label="Seleccionar Butacas"></p-button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</p-dialog>
--->
-
-<p-dialog header="Venta de Boleta" [(visible)]="ver_formulario">
     <form [formGroup]="form_funcion" #formFuncion>
         <div class="flex justify-content-center align-items-center gap-4 mb-5">
             <div class="flex flex-column justify-content-center align-items-start gap-4">
@@ -189,10 +142,9 @@
                 </div>
             </div>
             <div class="flex flex-column justify-content-center align-items-start gap-4">
-                <img src="" width="60" height="60">
-                <input type="date" formControlName="fecha" placeholder="Fecha" pInputText>
-                <p-dropdown [options]="salas" formControlName="sala" optionLabel="name" optionValue="code"></p-dropdown>
-                <input type="time" formControlName="horario" pInputText>
+                <img src="caratula" width="60" height="60">
+                <input type="date" formControlName="fecha" placeholder="Fecha" readonly pInputText>
+                <p-dropdown [options]="horarios" formControlName="sala" optionLabel="name" optionValue="code" placeholder="Selecciona la Hora"></p-dropdown>
                 <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
             </div>
         </div>

@@ -13,9 +13,9 @@ export class VentaBoletaComponent implements OnInit {
 
     funciones: any[] = [];
     funcion_pelicula: any[] = [];
-
     salas: any[] =[];
     peliculas: any[] = [];
+    horarios: any[] = [];
 
     form_funcion = this.fb.group({
         id: [''],
@@ -29,16 +29,20 @@ export class VentaBoletaComponent implements OnInit {
         boleta: ['', Validators.required],
     })
 
-    value3:any;
+
   ver_formulario: boolean = false;
     @ViewChild('formFuncion') formFuncion:any;
 
-  constructor(private api:ApiService, private fb:FormBuilder ) { }
+  constructor(private api:ApiService, private fb:FormBuilder ) {
+      this.horarios = [
+
+      ];
+  }
 
   ngOnInit(){
 
    this.listar_funciones();
-   this.listar_funciones_pelicula(0)
+   //this.listar_funciones_pelicula(0)
   }
 
 
@@ -59,7 +63,7 @@ export class VentaBoletaComponent implements OnInit {
             })
     }
     // Muestra en una Tabla
-    listar_funciones_pelicula(pelicula:number) {
+    /*listar_funciones_pelicula(pelicula:number) {
         let id = pelicula
         this.api.get('funcion',id)
             .subscribe({
@@ -74,10 +78,27 @@ export class VentaBoletaComponent implements OnInit {
                     console.log("Error listar funciones: ", error.message)
                 }
             })
-    }
+    }*/
 
     // Muestra los datos en un formulario
     llenar_form(funcion: any) {
+        console.log("Muesta la pelicula ", funcion)
+
+//-----FORMA PARA BUSCAR EL HORARIO-----------
+        this.api.get('funcion')
+            .subscribe({
+                next: (data: any) => {
+                    data.forEach((d: any)=>{
+                        if(d.pelicula.nombre_pelicula == funcion.pelicula.nombre_pelicula)
+                             this.horarios.push({
+                                code: d.id,
+                                name: d.horario,
+                        })
+                    })
+                    console.log("muestra los hoarios",this.peliculas)
+                }
+            })
+
         this.form_funcion.patchValue({
             id: funcion.id,
             codigo_funcion: funcion.codigo_funcion,
