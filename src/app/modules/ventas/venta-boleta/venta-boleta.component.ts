@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../../../providers/api.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {FormBuilder, Validators} from "@angular/forms";
 
 
 @Component({
@@ -13,8 +14,26 @@ export class VentaBoletaComponent implements OnInit {
     funciones: any[] = [];
     funcion_pelicula: any[] = [];
 
+    salas: any[] =[];
+    peliculas: any[] = [];
+
+    form_funcion = this.fb.group({
+        id: [''],
+        codigo_funcion: ['', Validators.required],
+        fecha: ['', Validators.required],
+        pelicula: ['', Validators.required],
+        sala: ['', Validators.required],
+        horario: ['', Validators.required],
+        sinopsis: ['', Validators.required],
+        caratula: ['', Validators.required],
+        boleta: ['', Validators.required],
+    })
+
+    value3:any;
   ver_formulario: boolean = false;
-  constructor(public api:ApiService) { }
+    @ViewChild('formFuncion') formFuncion:any;
+
+  constructor(private api:ApiService, private fb:FormBuilder ) { }
 
   ngOnInit(){
 
@@ -39,6 +58,7 @@ export class VentaBoletaComponent implements OnInit {
                 }
             })
     }
+    // Muestra en una Tabla
     listar_funciones_pelicula(pelicula:number) {
         let id = pelicula
         this.api.get('funcion',id)
@@ -56,7 +76,21 @@ export class VentaBoletaComponent implements OnInit {
             })
     }
 
+    // Muestra los datos en un formulario
+    llenar_form(funcion: any) {
+        this.form_funcion.patchValue({
+            id: funcion.id,
+            codigo_funcion: funcion.codigo_funcion,
+            fecha: funcion.fecha,
+            pelicula: funcion.pelicula.nombre_pelicula,
+            sinopsis: funcion.pelicula.sinopsis,
+            sala: funcion.sala.nombre_sala,
+            horario: funcion.horario,
+            caratula: funcion.pelicula.caratula,
+        });
+    }
 
+    Obtener(){}
 
 
 }

@@ -15,7 +15,7 @@ import { PeliculaComponent } from './modules/cinema_funciones/pelicula/pelicula.
 import { FuncionComponent } from './modules/cinema_funciones/funcion/funcion.component';
 import { VentaProductoComponent } from './modules/ventas/venta-producto/venta-producto.component';
 import { VentaBoletaComponent } from './modules/ventas/venta-boleta/venta-boleta.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ApiService } from "./providers/api.service";
@@ -34,6 +34,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ErrorService} from "./providers/error.service";
 import {SplitterModule} from "primeng/splitter";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,8 @@ import {SplitterModule} from "primeng/splitter";
         DropdownModule,
         InputTextareaModule,
         SplitterModule,
+        InputNumberModule,
+        FormsModule,
     ],
   providers: [
     ApiService,

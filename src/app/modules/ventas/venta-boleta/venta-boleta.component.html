@@ -1,10 +1,9 @@
-
 <!-- MUESTRA LA FUNCION DE LA PELICULA SELECCIONADA-->
 <!--<p-dialog header="Formulario de Funcion" [(visible)]="ver_formulario">-->
 <div class="flex justify-content-center align-items-center w-screen h-screen">
     <p-table [value]="funciones" responsiveLayout="scroll" class="w-8 h-min">
         <ng-template pTemplate="caption">
-
+            Funciones
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -25,46 +24,100 @@
                 <td> {{funcion.sala.nombre_sala}} </td>
                 <td> {{funcion.fecha}} </td>
                 <td> {{funcion.horario}} </td>
-                <td><p-button (click)="listar_funciones_pelicula(funcion.pelicula.id); ver_formulario=true" label="Seleccionar pelicula"></p-button></td>
+<!--                <td><p-button (click)="listar_funciones_pelicula(funcion.pelicula.id); ver_formulario=true" label="Seleccionar pelicula"></p-button></td>-->
+                <td><p-button (click)="llenar_form(funcion); ver_formulario=true" label="Seleccionar pelicula"></p-button></td>
             </tr>
+
+
+
         </ng-template>
     </p-table>
 </div>
 
-<!--</p-dialog>-->
-<!--<p-toast></p-toast>-->
+<!--MUESTRA LA INFORMACION EN TABLA-->
+<!--
+<p-dialog  [(visible)]="ver_formulario">
+    <div class="flex justify-content-center align-items-center w-screen h-screen">
+        <p-table [value]="funcion_pelicula"  class="w-8 h-min">
+            <ng-template pTemplate="caption">
+                Pelicula
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th> Pelicula </th>
+                    <th> Caratula </th>
+                    <th> Sinopsis</th>
+                    <th> Sala </th>
+                    <th> capacidad </th>
+                    <th> Fecha </th>
+                    <th> Horario </th>
+                    <th> # Boletas </th>
+                    <th> Accion </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-funcion_peli>
+                <tr >
+                    <td> {{funcion_peli.pelicula.nombre_pelicula}} </td>
+                    <td>  <img src="{{funcion_peli.pelicula.caratula}}"width="150" height="150"></td>
+                    <td> {{funcion_peli.pelicula.sinopsis}} </td>
+                    <td> {{funcion_peli.sala.nombre_sala}} </td>
+                    <td> {{funcion_peli.sala.capacidad}} </td>
+                    <td> {{funcion_peli.fecha}} </td>
+                    <td> {{funcion_peli.horario}} </td>
+                    <td>
 
-<!-- MUESTRA LA FUNCION DE LA PELICULA SELECCIONADA-->
-<p-dialog header="Formulario de Funcion" [(visible)]="ver_formulario">
-<div class="flex justify-content-center align-items-center w-screen h-screen">
-    <p-table [value]="funcion_pelicula"  class="w-8 h-min">
-        <ng-template pTemplate="caption">
+                        &lt;!&ndash;<p-inputNumber [(ngModel)]="value3" [min]="1" [max]="100" [showButtons]="true" buttonLayout="vertical"
+                                       spinnerMode="vertical" inputId="vertical"decrementButtonClass="p-button-secondary"
+                                       incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
+                                       decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>&ndash;&gt;
 
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th> Pelicula </th>
-                <th> Caratula </th>
-                <th> Sinopsis</th>
-                <th> Sala </th>
-                <th> capacidad </th>
-                <th> Fecha </th>
-                <th> Horario </th>
-                <th> Accion </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-funcion_peli>
-            <tr >
-                <td> {{funcion_peli.pelicula.nombre_pelicula}} </td>
-                <td>  <img src="{{funcion_peli.pelicula.caratula}}"width="60" height="60"></td>
-                <td> {{funcion_peli.pelicula.sinopsis}} </td>
-                <td> {{funcion_peli.sala.nombre_sala}} </td>
-                <td> {{funcion_peli.sala.capacidad}} </td>
-                <td> {{funcion_peli.sala.capacidad}} </td>
-                <td> {{funcion_peli.horario}} </td>
-                <td><p-button (click)="listar_funciones_pelicula(funcion_peli.pelicula.id); ver_formulario=true" label="Seleccionar pelicula"></p-button></td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+
+                    </td>
+                    <td>
+                        <p-button (click)="obtener(); ver_formulario=true" label="Seleccionar Butacas"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-dialog>
+-->
+
+<p-dialog header="pelicula" [(visible)]="ver_formulario">
+    <form [formGroup]="form_funcion" #formFuncion>
+        <div class="grid p-fluid">
+
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="pelicula" placeholder="Nombre Pelicula" pInputText>
+            </div>
+
+            <div class="col-12 md:col-4">
+                <input type="date" formControlName="fecha" placeholder="Fecha" pInputText>
+            </div>
+
+            <div class="col-12 md:col-4">
+                <p-dropdown [options]="salas" formControlName="sala" optionLabel="name" optionValue="code"></p-dropdown>
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="time" formControlName="horario" pInputText>
+            </div>
+            <div class="col-12 md:col-8">
+                <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
+            </div>
+            <div class="col-12 md:col-4">
+
+                <img src="caratula" width="100" height="100">
+            </div>
+            <div class="col-12 md:col-4">
+                <p-inputNumber [(ngModel)]="value3" [min]="1" [max]="100" [showButtons]="true" buttonLayout="vertical"
+                                                        spinnerMode="vertical" inputId="vertical"decrementButtonClass="p-button-secondary"
+                                                        incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
+                                                        decrementButtonIcon="pi pi-minus">
+            </p-inputNumber>
+            </div>
+
+        </div>
+        <p-button (click)="Obtener()" label="Seleccionar Butacas"></p-button>
+    </form>
 </p-dialog>
