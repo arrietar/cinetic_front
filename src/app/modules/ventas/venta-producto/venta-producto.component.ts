@@ -11,6 +11,13 @@ import {ApiService} from "../../../providers/api.service";
 export class VentaProductoComponent implements OnInit {
 
   ventas: any = [];
+  prod_act: any = [];
+  valor_venta:Number = 0;
+  productosdisponibles: any = [];
+  combosdisponibles: any = [];
+
+  ver_formulario: boolean = false;
+  ver_formulario1: boolean = false;
 
   form_producto = this.fb.group({
     id: [''],
@@ -29,17 +36,10 @@ export class VentaProductoComponent implements OnInit {
     cantidad: ['', Validators.required],
   })
 
-  productosdisponibles: any = [];
-  combosdisponibles: any = [];
-
-  ver_formulario: boolean = false;
-  ver_formulario1: boolean = false;
-
   constructor(private router: Router, private api: ApiService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.listar_productos_dsp()
-    console.log(this.productosdisponibles)
   }
 
   listar_productos_dsp() {
@@ -57,7 +57,7 @@ export class VentaProductoComponent implements OnInit {
         })
   }
 
-  armar_venta_prds(producto: any) {
+  marcar_prd(producto: any) {
     this.form_producto.patchValue({
       id: producto.id,
       nombre_producto: producto.nombre_producto,
@@ -66,7 +66,7 @@ export class VentaProductoComponent implements OnInit {
     })
   }
 
-  armar_venta_cmb(combo: any) {
+  marcar_cmb(combo: any) {
     this.form_combo.patchValue({
       id: combo.id,
       nombre_combo: combo.nombre_combo,
@@ -74,7 +74,7 @@ export class VentaProductoComponent implements OnInit {
     })
   }
 
-  guardar_venta_prd() {
+  incluir_prd_venta() {
     let item1: any =[];
     let num_A: any = '';
     let num1: number = 0;
@@ -84,22 +84,14 @@ export class VentaProductoComponent implements OnInit {
     item1.cantidad = this.form_producto.value['cantidad']
     num_A = this.form_producto.value['valor_venta']
     num1 = parseInt(num_A) * item1.cantidad
-    item1.valor_total = num1
+    item1.valor_item = num1
+    item1.suma_venta += num1
     this.ventas.push(item1)
     this.ver_formulario = false
     this.form_producto.reset()
-    console.log(this.ventas)
-
-
-    /*his.form_producto.get()
-    item1.push(producto.id, producto.nombre_producto, '', '') */
-
-    if (this.form_producto.value['id']) {
-      this.actualizar_producto()
-    }
   }
 
-  guardar_venta_cmb() {
+  incluir_cmb_venta() {
     let item1: any =[];
     let num_A: any = '';
     let num1: number = 0;
@@ -109,34 +101,47 @@ export class VentaProductoComponent implements OnInit {
     item1.cantidad = this.form_combo.value['cantidad']
     num_A = this.form_producto.value['valor_venta']
     num1 = parseInt(num_A) * item1.cantidad
-    item1.valor_total = num1
+    item1.valor_item = num1
+    item1.suma_venta += num1
     this.ventas.push(item1)
     this.ver_formulario = false
     this.form_producto.reset()
     console.log(this.ventas)
-
-
-    /*his.form_producto.get()
-    item1.push(producto.id, producto.nombre_producto, '', '') */
-
-    if (this.form_producto.value['id']) {
-      this.actualizar_producto()
-    }
   }
 
    actualizar_producto() {
-    this.api.update('producto', this.form_producto.value['id'], this.form_producto.value)
-        .subscribe(data => {
-          if (data != undefined) {
-            this.ver_formulario = false
-            this.ver_formulario1 = false
-            this.form_producto.reset()
-            this.listar_productos_dsp()
-          }
-        })
+    let cant: number = 0;
+
+    for (const producto of this.ventas ) {
+      cant = parseInt(producto.cantidad)
+      this.api.get('producto', producto.id)
+          .subscribe(data=>{
+            if (data != undefined) {
+              this.prod_act = data
+              console.log(data, this.prod_act)
+              this.prod_act['inventario'] -= cant
+              console.log(this.prod_act['inventario'], producto.id, this.prod_act)
+              this.api.update('producto', producto.id, this.prod_act)
+                  .subscribe(data => {
+                    if (data != undefined) {
+                      alert('Inventario de producto: ' + this.prod_act['nombre_producto'] + ' Actualizado en BD.')
+                      this.listar_productos_dsp()
+                      this.ventas = []
+                    }
+                  })
+            }
+          })
+
+    }
   }
 
   revisar_compra() {
+    this.actualizar_producto()
+    //this.ventas = []
+    this.ver_formulario = false
+    this.ver_formulario1 = false
+    //this.form_producto.reset()
+
 
   }
 }

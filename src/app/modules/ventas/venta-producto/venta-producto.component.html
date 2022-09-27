@@ -19,8 +19,8 @@
                         <td> {{producto.valor_venta| currency:'COP' :'$':'3.2-2'}} </td>
                         <td> {{producto.inventario| number:'3.0-0'}} </td>
                         <td>
-                            <p-button (click)="armar_venta_prds(producto); ver_formulario=true"
-                                      label="Vender"></p-button>
+                            <p-button (click)="marcar_prd(producto); ver_formulario=true"
+                                      label="Marcar"></p-button>
                         </td>
                     </tr>
                     <p-dialog header="Formulario Venta de Producto" [(visible)]="ver_formulario">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </form>
-                        <p-button (click)="guardar_venta_prd()" label="Guardar"></p-button>
+                        <p-button (click)="incluir_prd_venta()" label="Incluir"></p-button>
                     </p-dialog>
                 </ng-template>
             </p-table>
@@ -60,8 +60,8 @@
                         <td> {{combo.valor_venta| currency:'COP' :'$':'3.2-2'}} </td> -->
                         <td> {{combo.descuento| number:'1.2-2'}} </td>
                         <td>
-                            <p-button (click)="armar_venta_cmb(combo); ver_formulario1=true"
-                                      label="Vender"></p-button>
+                            <p-button (click)="marcar_cmb(combo); ver_formulario1=true"
+                                      label="Marcar"></p-button>
                         </td>
                     </tr>
                     <p-dialog header="Formulario Venta de Combo" [(visible)]="ver_formulario1">
@@ -78,32 +78,38 @@
                                 </div>
                             </div>
                         </form>
-                        <p-button (click)="guardar_venta_cmb()" label="Guardar"></p-button>
+                        <p-button (click)="incluir_cmb_venta()" label="Incluir"></p-button>
                     </p-dialog>
                 </ng-template>
             </p-table>
         </ng-template>
     </p-splitter>
-    <p-button (click)="revisar_compra()" label="Revisar Compra"></p-button>
+    <button type="text" pButton label="Revisar Compra" (click)="revisar_compra();op.toggle($event)"></button>
+    <div #actualTarget></div>
 </div>
 
-<!--
-<p-dialog header="Formulario Venta de Combo" [(visible)]="ver_formulario1">
-    <form [formGroup]="form_combo">
-        <div class="grid p-fluid">
-            <div class="col-12 md:col-4">
-                <input type="text" formControlName="nombre_combo" placeholder="Nombre Combo" readonly pInputText>
-            </div>
-            <div class="col-12 md:col-4">
-                <input type="text" formControlName="descuento"  placeholder="Descuento" readonly pInputText>
-            </div>
-            <div class="col-12 md:col-4">
-                <input type="text" formControlName="cantidad" placeholder="Cantidad Requerida" pInputText>
-            </div>
-        </div>
-    </form>
-    <p-button (click)="guardar_venta_cmb()" label="Guardar"></p-button>
-</p-dialog> -->
+<p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+    <ng-template pTemplate>
+        <p-table [value]="ventas">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Valor</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-prd>
+                <tr>
+                    <td>{{prd.nombre}}</td>
+                    <td>{{prd.cantidad}}</td>
+                    <td>{{prd.valor_item}}</td>
+                </tr>
+            </ng-template>
+            Valor total compra ==> ${{valor_venta}}
+        </p-table>
+    </ng-template>
+</p-overlayPanel>
+
 
 
 

@@ -35,6 +35,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ErrorService} from "./providers/error.service";
 import {SplitterModule} from "primeng/splitter";
 import {InputNumberModule} from "primeng/inputnumber";
+import {OverlayPanelModule} from "primeng/overlaypanel";
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import {InputNumberModule} from "primeng/inputnumber";
         SplitterModule,
         InputNumberModule,
         FormsModule,
+        OverlayPanelModule,
     ],
   providers: [
     ApiService,
