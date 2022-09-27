@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ApiService} from "../../../providers/api.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-venta-producto',
   templateUrl: './venta-producto.component.html',
-  styleUrls: ['./venta-producto.component.css']
+  styleUrls: ['./venta-producto.component.css'],
+  providers: [MessageService],
 })
 export class VentaProductoComponent implements OnInit {
 
@@ -36,7 +38,11 @@ export class VentaProductoComponent implements OnInit {
     cantidad: ['', Validators.required],
   })
 
-  constructor(private router: Router, private api: ApiService, private fb: FormBuilder) { }
+  constructor(private router: Router,
+              private api: ApiService,
+              private fb: FormBuilder,
+              private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.listar_productos_dsp()
@@ -113,20 +119,20 @@ export class VentaProductoComponent implements OnInit {
     let cant: number = 0;
 
     for (const producto of this.ventas ) {
-      cant = parseInt(producto.cantidad)
       this.api.get('producto', producto.id)
           .subscribe(data=>{
             if (data != undefined) {
               this.prod_act = data
-              console.log(data, this.prod_act)
-              this.prod_act['inventario'] -= cant
+              this.prod_act['inventario'] -= parseInt(producto.cantidad)
               console.log(this.prod_act['inventario'], producto.id, this.prod_act)
               this.api.update('producto', producto.id, this.prod_act)
                   .subscribe(data => {
                     if (data != undefined) {
-                      alert('Inventario de producto: ' + this.prod_act['nombre_producto'] + ' Actualizado en BD.')
+                      this.messageService.add({
+                        severity: 'success',
+                        summary: `Inventario de producto: ${this.prod_act['nombre_producto']} actualizada en BD`,
+                      })
                       this.listar_productos_dsp()
-                      this.ventas = []
                     }
                   })
             }
