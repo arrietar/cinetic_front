@@ -1,5 +1,4 @@
-<div class="flex justify-content-center align-items-center w-screen h-screen">
-
+<div class="flex justify-content-center w-screen my-8">
     <p-splitter [style]="{'height': '300px'}" styleClass="mb-5 w-12 p-1 h-min" [gutterSize]="12">
         <ng-template pTemplate>
             <p-table [value]="productosdisponibles" responsiveLayout="scroll" >
@@ -25,16 +24,10 @@
                     </tr>
                     <p-dialog header="Formulario Venta de Producto" [(visible)]="ver_formulario">
                         <form [formGroup]="form_producto">
-                            <div class="grid p-fluid">
-                                <div class="col-12 md:col-4">
-                                    <input type="text" formControlName="nombre_producto" placeholder="Nombre Producto" readonly pInputText>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <input type="text" formControlName="valor_venta" placeholder="Valor" readonly pInputText>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <input type="text" formControlName="cantidad" placeholder="Cantidad Requerida" pInputText>
-                                </div>
+                            <div class="flex flex-column justify-content-center align-items-start gap-4 mb-5">
+                                <input type="text" formControlName="nombre_producto" placeholder="Nombre Producto" readonly pInputText>
+                                <input type="text" formControlName="valor_venta" placeholder="Valor" readonly pInputText>
+                                <input type="text" formControlName="cantidad" placeholder="Cantidad Requerida" pInputText>
                             </div>
                         </form>
                         <p-button (click)="incluir_prd_venta()" label="Incluir"></p-button>
@@ -66,16 +59,10 @@
                     </tr>
                     <p-dialog header="Formulario Venta de Combo" [(visible)]="ver_formulario1">
                         <form [formGroup]="form_combo">
-                            <div class="grid p-fluid">
-                                <div class="col-12 md:col-4">
-                                    <input type="text" formControlName="nombre_combo" placeholder="Nombre Combo" readonly pInputText>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <input type="text" formControlName="descuento"  placeholder="Descuento" readonly pInputText>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <input type="text" formControlName="cantidad" placeholder="Cantidad Requerida" pInputText>
-                                </div>
+                            <div class="flex flex-column justify-content-center align-items-start gap-4 mb-5">
+                                <input type="text" formControlName="nombre_combo" placeholder="Nombre Combo" readonly pInputText>
+                                <input type="text" formControlName="descuento"  placeholder="Descuento" readonly pInputText>
+                                <input type="text" formControlName="cantidad" placeholder="Cantidad Requerida" pInputText>
                             </div>
                         </form>
                         <p-button (click)="incluir_cmb_venta()" label="Incluir"></p-button>

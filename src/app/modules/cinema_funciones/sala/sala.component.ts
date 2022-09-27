@@ -11,11 +11,13 @@ import {ApiService} from "../../../providers/api.service";
 export class SalaComponent implements OnInit {
 
   salas: any = [];
+  cinemas: any = [];
 
   form_sala = this.fb.group({
     id: [''],
     codigo_sala: ['', Validators.required],
     nombre_sala: ['', Validators.required],
+    cinema: ['', Validators.required],
     tipo_sala: ['', Validators.required],
     capacidad: ['', Validators.required],
   })
@@ -26,6 +28,7 @@ export class SalaComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar_sala()
+    this.listar_cinema()
   }
 
   listar_sala() {
@@ -37,11 +40,26 @@ export class SalaComponent implements OnInit {
         })
   }
 
+  listar_cinema() {
+    this.api.get('cinema')
+        .subscribe((data: any)=>{
+          if (data != undefined) {
+            data.forEach((d: any)=>{
+              this.cinemas.push({
+                code: d.id,
+                name: d.nombre_cinema,
+              })
+            })
+          }
+        })
+  }
+
   llenar_form(sala: any) {
     this.form_sala.patchValue({
       id: sala.id,
       codigo_sala: sala.codigo_sala,
       nombre_sala: sala.nombre_sala,
+      cinema: sala.cinema,
       tipo_sala: sala.tipo_sala,
       capacidad: sala.capacidad,
     })

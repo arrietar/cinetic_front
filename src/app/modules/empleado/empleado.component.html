@@ -1,4 +1,4 @@
-<div class="flex justify-content-center align-items-center w-screen h-screen">
+<div class="flex justify-content-center w-screen my-8">
   <p-table [value]="empleados" responsiveLayout="scroll" class="w-8 h-min">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
@@ -27,34 +27,22 @@
 </div>
 <p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
   <form [formGroup]="form_empleado">
-    <div class="grid p-fluid">
-      <div class="col-12 md:col-4">
-        <input type="text" formControlName="identificacion" placeholder="identificacion" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
+    <div class="flex flex-column justify-content-center align-items-start gap-4 mb-5">
+      <input type="text" formControlName="identificacion" placeholder="identificacion" pInputText>
+      <div class="flex gap-4">
         <input type="text" formControlName="nombres" placeholder="Nombres" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
         <input type="text" formControlName="apellidos" placeholder="Apellidos" pInputText>
       </div>
-      <div class="col-12 md:col-4">
+      <div class="flex gap-4">
         <input type="text" formControlName="direccion" placeholder="Direccion" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
         <input type="phone" formControlName="telefono" placeholder="Telefono" pInputText>
       </div>
-      <div class="col-12 md:col-4">
-        <p-calendar formControlName="fecha_nacimiento" [showIcon]="true" [touchUI]="true" [readonlyInput]="true" inputId="touchui"></p-calendar>
-      </div>
-      <div class="col-12 md:col-4">
+      <p-calendar formControlName="fecha_nacimiento" [showIcon]="true" [touchUI]="true" [readonlyInput]="true" inputId="touchui"></p-calendar>
+      <div class="flex gap-4">
         <input type="text" formControlName="username" placeholder="Username" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
         <input type="email" formControlName="email" placeholder="Email" pInputText>
       </div>
-      <div class="col-12 md:col-4">
-        <input type="password" formControlName="password" placeholder="Password" pInputText>
-      </div>
+      <input type="password" formControlName="password" placeholder="Password" pInputText>
     </div>
   </form>
   <p-button (click)="guardar_actualizar_empleado()" label="Guardar"></p-button>

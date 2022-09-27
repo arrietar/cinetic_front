@@ -1,5 +1,5 @@
-<div class="flex justify-content-center align-items-center w-screen h-screen">
-  <p-table [value]="peliculas" responsiveLayout="scroll" class="w-8 h-min">
+<div class="flex justify-content-center w-screen my-8">
+  <p-table [value]="peliculas" responsiveLayout="scroll" class="w-8">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         <p-button (click)="form_pelicula.reset(); ver_formulario=true" label="Adicionar"></p-button>
@@ -30,31 +30,15 @@
 
 <p-dialog header="Formulario de Pelicula" [(visible)]="ver_formulario">
   <form [formGroup]="form_pelicula" #formPelicula>
-    <div class="grid p-fluid">
-      <div class="col-12 md:col-4">
-        <input type="text" formControlName="codigo_pelicula" placeholder="Codigo Pelicula" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
-        <input type="text" formControlName="nombre_pelicula" placeholder="Nombre Pelicula" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
-        <p-dropdown [options]="generos" formControlName="genero" optionLabel="name" optionValue="code"></p-dropdown>
-      </div>
-      <div class="col-12 md:col-4">
-        <p-dropdown [options]="clasificaciones" formControlName="clasificacion" optionLabel="name" optionValue="code"></p-dropdown>
-      </div>
-      <div class="col-12 md:col-4">
-        <input type="date" formControlName="fecha_filmacion" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
-        <input type="number" formControlName="duracion" placeholder="Duracion (min)" pInputText>
-      </div>
-      <div class="col-12 md:col-4">
-        <input type="file" placeholder="Foto Caratula" pInputText (change)="onImageChange($event)">
-      </div>
-      <div class="col-12 md:col-8">
-        <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
-      </div>
+    <div class="flex flex-column justify-content-center align-items-start gap-4 mb-5">
+      <input type="text" formControlName="codigo_pelicula" placeholder="Codigo Pelicula" pInputText>
+      <input type="text" formControlName="nombre_pelicula" placeholder="Nombre Pelicula" pInputText>
+      <p-dropdown [options]="generos" formControlName="genero" optionLabel="name" optionValue="code"></p-dropdown>
+      <p-dropdown [options]="clasificaciones" formControlName="clasificacion" optionLabel="name" optionValue="code"></p-dropdown>
+      <input type="date" formControlName="fecha_filmacion" pInputText>
+      <input type="number" formControlName="duracion" placeholder="Duracion (min)" pInputText>
+      <input type="file" placeholder="Foto Caratula" pInputText (change)="onImageChange($event)">
+      <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
     </div>
     <p-button (click)="guardar_actualizar_pelicula()" label="Guardar"></p-button>
   </form>

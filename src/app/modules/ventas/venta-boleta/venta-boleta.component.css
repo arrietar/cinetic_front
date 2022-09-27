@@ -1,0 +1,29 @@
+.sala {
+    width: 20rem;
+    height: 18rem;
+    border: 1px solid #aaa;
+    border-radius: 20px;
+}
+
+.pantalla {
+    height: 2rem;
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-color: #222;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.silla {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #aaa;
+    background-color: #444;
+    border-radius: 4px;
+}
+
+.silla:hover {
+    background-color: green;
+    scale: 1.1;
+}

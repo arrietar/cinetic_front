@@ -1,6 +1,6 @@
 <!-- MUESTRA LA FUNCION DE LA PELICULA SELECCIONADA-->
 <!--<p-dialog header="Formulario de Funcion" [(visible)]="ver_formulario">-->
-<div class="flex justify-content-center align-items-center w-screen h-screen">
+<div class="flex justify-content-center w-screen my-8">
     <p-table [value]="funciones" responsiveLayout="scroll" class="w-8 h-min">
         <ng-template pTemplate="caption">
             Funciones
@@ -17,19 +17,16 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-funcion>
-            <tr >
+            <tr>
                 <td> {{funcion.pelicula.nombre_pelicula}} </td>
-                <td>  <img src="{{funcion.pelicula.caratula}}"width="60" height="60"></td>
+                <td> <img src="{{funcion.pelicula.caratula}}" width="60" height="60"> </td>
                 <td> {{funcion.pelicula.sinopsis}} </td>
                 <td> {{funcion.sala.nombre_sala}} </td>
                 <td> {{funcion.fecha}} </td>
                 <td> {{funcion.horario}} </td>
-<!--                <td><p-button (click)="listar_funciones_pelicula(funcion.pelicula.id); ver_formulario=true" label="Seleccionar pelicula"></p-button></td>-->
-                <td><p-button (click)="llenar_form(funcion); ver_formulario=true" label="Seleccionar pelicula"></p-button></td>
+                <!-- <td> <p-button (click)="listar_funciones_pelicula(funcion.pelicula.id); ver_formulario=true" label="Seleccionar pelicula"></p-button> </td> -->
+                <td> <p-button (click)="llenar_form(funcion); ver_formulario=true" label="Seleccionar pelicula"></p-button> </td>
             </tr>
-
-
-
         </ng-template>
     </p-table>
 </div>
@@ -84,40 +81,121 @@
 </p-dialog>
 -->
 
-<p-dialog header="pelicula" [(visible)]="ver_formulario">
+<p-dialog header="Venta de Boleta" [(visible)]="ver_formulario">
     <form [formGroup]="form_funcion" #formFuncion>
-        <div class="grid p-fluid">
-
-            <div class="col-12 md:col-4">
+        <div class="flex justify-content-center align-items-center gap-4 mb-5">
+            <div class="flex flex-column justify-content-center align-items-start gap-4">
                 <input type="text" formControlName="pelicula" placeholder="Nombre Pelicula" pInputText>
+                <div class="sala flex flex-column p-3">
+                    <div class="pantalla">Pantalla</div>
+                    <div class="flex flex-column justify-content-end align-items-center w-full h-full p-2">
+                        <div class="flex justify-content-between align-items-center w-full" style="height: 1.5rem;">
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-content-between align-items-center w-full" style="height: 1.5rem;">
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-content-between align-items-center w-full" style="height: 1.5rem;">
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-content-between align-items-center w-full" style="height: 1.5rem;">
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-content-between align-items-center w-full" style="height: 1.5rem;">
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-content-between align-items-center w-full" style="height: 1.5rem;">
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                                <div class="silla"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-12 md:col-4">
+            <div class="flex flex-column justify-content-center align-items-start gap-4">
+                <img src="" width="60" height="60">
                 <input type="date" formControlName="fecha" placeholder="Fecha" pInputText>
-            </div>
-
-            <div class="col-12 md:col-4">
                 <p-dropdown [options]="salas" formControlName="sala" optionLabel="name" optionValue="code"></p-dropdown>
-            </div>
-            <div class="col-12 md:col-4">
                 <input type="time" formControlName="horario" pInputText>
-            </div>
-            <div class="col-12 md:col-8">
                 <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
             </div>
-            <div class="col-12 md:col-4">
-
-                <img src="caratula" width="100" height="100">
-            </div>
-            <div class="col-12 md:col-4">
-                <p-inputNumber [(ngModel)]="value3" [min]="1" [max]="100" [showButtons]="true" buttonLayout="vertical"
-                                                        spinnerMode="vertical" inputId="vertical"decrementButtonClass="p-button-secondary"
-                                                        incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
-                                                        decrementButtonIcon="pi pi-minus">
-            </p-inputNumber>
-            </div>
-
         </div>
-        <p-button (click)="Obtener()" label="Seleccionar Butacas"></p-button>
+        <p-button (click)="Obtener()" label="Seleccionar sillas"></p-button>
     </form>
 </p-dialog>

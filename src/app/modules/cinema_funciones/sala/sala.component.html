@@ -1,4 +1,4 @@
-<div class="flex justify-content-center align-items-center w-screen h-screen">
+<div class="flex justify-content-center w-screen my-8">
     <p-table [value]="salas" responsiveLayout="scroll" class="w-8 h-min">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
@@ -9,6 +9,7 @@
             <tr>
                 <th> Codigo </th>
                 <th> Nombre </th>
+                <th> Cinema </th>
                 <th> Tipo </th>
                 <th> Capacidad </th>
                 <th> Accion </th>
@@ -18,6 +19,7 @@
             <tr>
                 <td> {{sala.codigo_sala}} </td>
                 <td> {{sala.nombre_sala}} </td>
+                <td> {{sala.cinema.nombre_cinema}} </td>
                 <td> {{sala.tipo_sala}} </td>
                 <td> {{sala.capacidad}} </td>
                 <td><p-button (click)="llenar_form(sala); ver_formulario=true" label="Editar"></p-button></td>
@@ -27,19 +29,12 @@
 </div>
 <p-dialog header="Formulario de Producto" [(visible)]="ver_formulario">
     <form [formGroup]="form_sala">
-        <div class="grid p-fluid">
-            <div class="col-12 md:col-4">
+        <div class="flex flex-column justify-content-center align-items-start gap-4 mb-5">
                 <input type="text" formControlName="codigo_sala" placeholder="Codigo sala" pInputText>
-            </div>
-            <div class="col-12 md:col-4">
                 <input type="text" formControlName="nombre_sala" placeholder="Nombre sala" pInputText>
-            </div>
-            <div class="col-12 md:col-4">
+                <p-dropdown [options]="cinemas" formControlName="cinema" optionLabel="name" optionValue="code"></p-dropdown>
                 <input type="text" formControlName="tipo_sala" placeholder="Tipo sala" pInputText>
-            </div>
-            <div class="col-12 md:col-4">
                 <input type="text" formControlName="capacidad" placeholder="Capacidad" pInputText>
-            </div>
         </div>
     </form>
     <p-button (click)="guardar_actualizar_sala()" label="Guardar"></p-button>
