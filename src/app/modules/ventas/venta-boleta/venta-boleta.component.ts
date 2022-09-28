@@ -62,23 +62,7 @@ export class VentaBoletaComponent implements OnInit {
                 }
             })
     }
-    // Muestra en una Tabla
-    /*listar_funciones_pelicula(pelicula:number) {
-        let id = pelicula
-        this.api.get('funcion',id)
-            .subscribe({
-                next: (data: any) => {
-                    if (data != undefined) {
-                        this.funcion_pelicula =  Array.isArray(data)? data : [data];
-                        // this.funciones = data;
-                        console.log("los datos de funciones",this.funcion_pelicula)
-                    }
-                },
-                error: (error: HttpErrorResponse) => {
-                    console.log("Error listar funciones: ", error.message)
-                }
-            })
-    }*/
+
 
     // Muestra los datos en un formulario
     llenar_form(funcion: any) {
