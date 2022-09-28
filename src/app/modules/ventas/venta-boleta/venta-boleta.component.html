@@ -25,7 +25,7 @@
                 <td> {{funcion.fecha}} </td>
                 <td> {{funcion.horario}} </td>
                 <!-- <td> <p-button (click)="listar_funciones_pelicula(funcion.pelicula.id); ver_formulario=true" label="Seleccionar pelicula"></p-button> </td> -->
-                <td> <p-button (click)="llenar_form(funcion); ver_formulario=true" label="Seleccionar pelicula"></p-button> </td>
+                <td> <p-button (click)="llenar_form(funcion); ver_formulario=true; horarios= []" label="Seleccionar pelicula"></p-button> </td>
             </tr>
         </ng-template>
     </p-table>
@@ -143,7 +143,8 @@
             </div>
             <div class="flex flex-column justify-content-center align-items-start gap-4">
                 <img src="caratula" width="60" height="60">
-                <input type="date" formControlName="fecha" placeholder="Fecha" readonly pInputText>
+                <input type="date" formControlName="fecha"  readonly pInputText>
+                <input type="text" formControlName="caratula"  readonly pInputText>
                 <p-dropdown [options]="horarios" formControlName="sala" optionLabel="name" optionValue="code" placeholder="Selecciona la Hora"></p-dropdown>
                 <textarea pInputTextarea formControlName="sinopsis" [autoResize]="true" [rows]="3"></textarea>
             </div>

@@ -16,6 +16,7 @@ export class VentaBoletaComponent implements OnInit {
     salas: any[] =[];
     peliculas: any[] = [];
     horarios: any[] = [];
+    img : any;
 
     form_funcion = this.fb.group({
         id: [''],
@@ -92,6 +93,7 @@ export class VentaBoletaComponent implements OnInit {
             sala: funcion.sala.nombre_sala,
             horario: funcion.horario,
             caratula: funcion.pelicula.caratula,
+
         });
     }
 
