@@ -88,8 +88,8 @@
             <ng-template pTemplate="body" let-prd>
                 <tr>
                     <td>{{prd.nombre}}</td>
-                    <td>{{prd.cantidad}}</td>
-                    <td>{{prd.valor_item}}</td>
+                    <td>{{prd.cantidad| number:'2.2-2'}}</td>
+                    <td>{{prd.valor_item| currency:'COP' :'$':'3.2-2'}}</td>
                 </tr>
             </ng-template>
             Valor total compra ==> ${{valor_venta}}

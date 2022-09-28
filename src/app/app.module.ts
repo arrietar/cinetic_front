@@ -36,6 +36,7 @@ import {ErrorService} from "./providers/error.service";
 import {SplitterModule} from "primeng/splitter";
 import {InputNumberModule} from "primeng/inputnumber";
 import {OverlayPanelModule} from "primeng/overlaypanel";
+import { IntegracomboComponent } from './modules/productos_combos/integracombo/integracombo.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
     PeliculaComponent,
     FuncionComponent,
     VentaProductoComponent,
-    VentaBoletaComponent
+    VentaBoletaComponent,
+    IntegracomboComponent
   ],
     imports: [
         BrowserModule,

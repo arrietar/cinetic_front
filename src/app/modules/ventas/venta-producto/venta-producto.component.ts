@@ -13,10 +13,13 @@ import {MessageService} from "primeng/api";
 export class VentaProductoComponent implements OnInit {
 
   ventas: any = [];
+  //ventas_combos = [];
   prod_act: any = [];
   valor_venta:Number = 0;
   productosdisponibles: any = [];
+  prod_dsp: any = [];
   combosdisponibles: any = [];
+  integracombo: any = [];
 
   ver_formulario: boolean = false;
   ver_formulario1: boolean = false;
@@ -46,6 +49,7 @@ export class VentaProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar_productos_dsp()
+    this.listar_integracombo()
   }
 
   listar_productos_dsp() {
@@ -59,6 +63,15 @@ export class VentaProductoComponent implements OnInit {
         .subscribe(data=>{
           if (data != undefined) {
             this.combosdisponibles = data
+          }
+        })
+  }
+
+  listar_integracombo() {
+    this.api.get('integraCombo')
+        .subscribe(data=>{
+          if (data != undefined) {
+            this.integracombo = data
           }
         })
   }
@@ -81,42 +94,55 @@ export class VentaProductoComponent implements OnInit {
   }
 
   incluir_prd_venta() {
-    let item1: any =[];
+
     let num_A: any = '';
+    let num_B: any = '';
     let num1: number = 0;
 
-    item1.id = this.form_producto.value['id']
-    item1.nombre = this.form_producto.value['nombre_producto']
-    item1.cantidad = this.form_producto.value['cantidad']
     num_A = this.form_producto.value['valor_venta']
-    num1 = parseInt(num_A) * item1.cantidad
-    item1.valor_item = num1
-    item1.suma_venta += num1
-    this.ventas.push(item1)
+    num_B = this.form_producto.value['cantidad']
+    num1 = parseInt(num_A) * num_B
+    this.ventas.push({
+        id: this.form_producto.value['id'],
+        nombre: this.form_producto.value['nombre_producto'],
+        cantidad: parseInt(num_B),
+        valor_item: num1,
+        suma_item: parseInt(num_A) * num_B
+    })
     this.ver_formulario = false
     this.form_producto.reset()
   }
 
   incluir_cmb_venta() {
-    let item1: any =[];
     let num_A: any = '';
     let num1: number = 0;
 
-    item1.id = this.form_combo.value['id']
-    item1.nombre = this.form_combo.value['nombre_combo']
-    item1.cantidad = this.form_combo.value['cantidad']
-    num_A = this.form_producto.value['valor_venta']
-    num1 = parseInt(num_A) * item1.cantidad
-    item1.valor_item = num1
-    item1.suma_venta += num1
-    this.ventas.push(item1)
-    this.ver_formulario = false
-    this.form_producto.reset()
-    console.log(this.ventas)
+    for (const item_ic of this.integracombo) {
+      if (item_ic.combo.id == this.form_combo.value['id']) {
+          num_A = this.form_combo.value['cantidad']
+          num1 = parseInt(num_A) * item_ic.cantidad_producto
+          this.api.get('producto', item_ic.producto.id)
+              .subscribe(data => {
+                if (data != undefined) {
+                    this.prod_dsp = data
+                    if (true) {
+                        this.ventas.push({
+                            id: item_ic.producto.id,
+                            nombre: this.prod_dsp['nombre_producto'],
+                            cantidad: num1,
+                            valor_item: parseInt(this.prod_dsp['valor_venta']) * num1
+                        })
+                    }
+                  console.log(this.ventas)
+                }
+              })
+      }
+    }
+    this.ver_formulario1 = false
+    this.form_combo.reset()
   }
 
    actualizar_producto() {
-    let cant: number = 0;
 
     for (const producto of this.ventas ) {
       this.api.get('producto', producto.id)
@@ -142,6 +168,7 @@ export class VentaProductoComponent implements OnInit {
   }
 
   revisar_compra() {
+    console.log(this.ventas)
     this.actualizar_producto()
     //this.ventas = []
     this.ver_formulario = false
