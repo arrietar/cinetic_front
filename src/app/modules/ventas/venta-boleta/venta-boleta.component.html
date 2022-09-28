@@ -19,7 +19,7 @@
         <ng-template pTemplate="body" let-funcion>
             <tr>
                 <td> {{funcion.pelicula.nombre_pelicula}} </td>
-                <td> <img src="{{funcion.pelicula.caratula}}" width="60" height="60"> </td>
+                <td> <img src="{{funcion.pelicula.caratula}}" alt="Imagen" width="60" height="60"> </td>
                 <td> {{funcion.pelicula.sinopsis}} </td>
                 <td> {{funcion.sala.nombre_sala}} </td>
                 <td> {{funcion.fecha}} </td>
@@ -142,7 +142,7 @@
                 </div>
             </div>
             <div class="flex flex-column justify-content-center align-items-start gap-4">
-                <img src="caratula" width="60" height="60">
+                <img src="{{caratula_actual}}" width="60" height="60">
                 <input type="date" formControlName="fecha"  readonly pInputText>
                 <input type="text" formControlName="caratula"  readonly pInputText>
                 <p-dropdown [options]="horarios" formControlName="sala" optionLabel="name" optionValue="code" placeholder="Selecciona la Hora"></p-dropdown>

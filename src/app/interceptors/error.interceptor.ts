@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -14,25 +14,26 @@ import {ErrorService} from "../providers/error.service";
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private api: ApiService, private error:ErrorService) {}
+  constructor(private router: Router, private api: ApiService, private error: ErrorService) {
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-        catchError((error: HttpErrorResponse) => {
-          const {status, message} = error;
-          if(status == 401){
-            this.api.usuario = undefined;
-            this.router.navigate(['/login']);
-          }
+      catchError((error: HttpErrorResponse) => {
+        const {status, message} = error;
+        if (status == 401) {
+          this.api.usuario = undefined;
+          this.router.navigate(['/login']);
+        }
 
-          if(status >= 500){
-            this.error.createError(status, message);
-            this.router.navigate(['/error'])
-          }
+        if (status >= 500) {
+          this.error.createError(status, message);
+          this.router.navigate(['/error'])
+        }
 
-          console.error("Error interceptor: ", error);
-          return  throwError(() => error);
-        })
-      )
+        console.error("Error interceptor: ", error);
+        return throwError(() => error);
+      })
+    )
   }
 }

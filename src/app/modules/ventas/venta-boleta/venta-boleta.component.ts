@@ -17,6 +17,7 @@ export class VentaBoletaComponent implements OnInit {
     peliculas: any[] = [];
     horarios: any[] = [];
     img : any;
+    caratula_actual: any;
 
     form_funcion = this.fb.group({
         id: [''],
@@ -95,7 +96,11 @@ export class VentaBoletaComponent implements OnInit {
             caratula: funcion.pelicula.caratula,
 
         });
+
+        this.caratula_actual = this.form_funcion.get('caratula')?.value;
     }
+
+
 
     Obtener(){}
 
