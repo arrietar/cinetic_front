@@ -12,6 +12,7 @@ import {PeliculaComponent} from "./modules/cinema_funciones/pelicula/pelicula.co
 import {FuncionComponent} from "./modules/cinema_funciones/funcion/funcion.component";
 import {VentaProductoComponent} from "./modules/ventas/venta-producto/venta-producto.component";
 import {VentaBoletaComponent} from "./modules/ventas/venta-boleta/venta-boleta.component";
+import { IntegracomboComponent } from './modules/productos_combos/integracombo/integracombo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'funcion', component: FuncionComponent },
   { path: 'venta_producto', component: VentaProductoComponent },
   { path: 'venta_boleta', component: VentaBoletaComponent },
+  { path: 'integracombo', component: IntegracomboComponent },
   { path: '**', redirectTo: '/login'}
 ];
 

@@ -36,7 +36,6 @@ import {ErrorService} from "./providers/error.service";
 import {SplitterModule} from "primeng/splitter";
 import {InputNumberModule} from "primeng/inputnumber";
 import {OverlayPanelModule} from "primeng/overlaypanel";
-import {ImageModule} from "primeng/image";
 
 @NgModule({
   declarations: [
@@ -77,7 +76,6 @@ import {ImageModule} from "primeng/image";
         InputNumberModule,
         FormsModule,
         OverlayPanelModule,
-        ImageModule,
     ],
   providers: [
     ApiService,
