@@ -16,7 +16,7 @@ export class VentaBoletaComponent implements OnInit {
     salas: any[] =[];
     peliculas: any[] = [];
     horarios: any[] = [];
-    img : any;
+
     caratula_actual: any;
 
     form_funcion = this.fb.group({
@@ -36,9 +36,7 @@ export class VentaBoletaComponent implements OnInit {
     @ViewChild('formFuncion') formFuncion:any;
 
   constructor(private api:ApiService, private fb:FormBuilder ) {
-      this.horarios = [
-
-      ];
+      this.horarios = [];
   }
 
   ngOnInit(){
@@ -46,7 +44,6 @@ export class VentaBoletaComponent implements OnInit {
    this.listar_funciones();
    //this.listar_funciones_pelicula(0)
   }
-
 
     listar_funciones() {
 
@@ -64,7 +61,6 @@ export class VentaBoletaComponent implements OnInit {
                 }
             })
     }
-
 
     // Muestra los datos en un formulario
     llenar_form(funcion: any) {
